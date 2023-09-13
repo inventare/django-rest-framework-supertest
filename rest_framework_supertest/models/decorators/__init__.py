@@ -1,3 +1,3 @@
-from .fields import faker_field
+from .fields import faker_fields
 
-__all__ = ['faker_field']
+__all__ = ['faker_fields']
