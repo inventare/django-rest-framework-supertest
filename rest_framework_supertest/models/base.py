@@ -1,9 +1,7 @@
 from typing import Optional
-from faker import Faker
+from rest_framework_supertest.utils.faker import fake
 
 def create_faker(model_class, data: Optional[dict] = None, save = True):
-    fake = Faker('pt_BR')
-
     faker_fields = model_class.faker_fields
     fields = faker_fields.keys()
     create_dict = {}
