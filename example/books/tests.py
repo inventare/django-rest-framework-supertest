@@ -16,7 +16,7 @@ class BookTestAPITestCase(AssertAPIExceptionMixin, APITestCase):
             'username': 'any',
             'password': 'any'
         })
-        
+
         self.assertAPIException(response, self.exception)
 
 # Create your tests here.
