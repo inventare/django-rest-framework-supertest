@@ -51,6 +51,10 @@ class AssertAuthenticationMixin:
         if self._authentication:
             return self._authentication
         
+        if not self.authentication_class:
+            msg = "To use authentication methods, authentication_class should be configured."
+            raise AttributeError(msg)
+        
         if type(self.authentication_class) == str:
             try:
                 authentication_class = import_string(self.authentication_class)
