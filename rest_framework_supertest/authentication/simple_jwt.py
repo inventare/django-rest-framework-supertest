@@ -13,6 +13,6 @@ class SimpleJWTAuthentication(AuthenticationBase):
             return
             
         token = str(AccessToken.for_user(user))
-        self.client.credentials('Bearer %s' % token)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer %s' % token)
 
 __all__ = ['SimpleJWTAuthentication']
