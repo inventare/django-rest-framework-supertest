@@ -16,5 +16,7 @@ class ImageProvider(BaseProvider):
 
         return ContentFile(image_file.read(), name)
 
+def add_providers(fake):
+    fake.add_provider(ImageProvider)
 
-__all__ = ['ImageProvider']
+__all__ = ['ImageProvider', 'add_providers']
