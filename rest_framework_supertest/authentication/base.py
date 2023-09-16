@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import Optional, List
 from django.db.models import Model
 from rest_framework.test import APIClient
 
 class AuthenticationBase:
     client: APIClient
+    authentication_failed_exceptions: List[Exception] = []
 
     def __init__(self, client: APIClient):
         self.client = client
