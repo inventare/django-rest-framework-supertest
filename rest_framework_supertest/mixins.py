@@ -7,16 +7,23 @@ from rest_framework_supertest.utils.exceptions import APIExceptionsUtils
 from rest_framework_supertest.authentication import AuthenticationBase
 
 class AssertAPIExceptionMixin:
+    def assertResponseHeaders(self, response: HttpResponse, headers):
+        # TODO: move from here to another mixin
+        for header in headers.keys():
+            value = headers.get(header)
+            self.assertEquals(response.headers.get(header), value)
+    
+    def assertResponseJson(self, response: HttpResponse, data: dict):
+        # TODO: move from here to another mixin
+        return self.assertEquals(json.dumps(data), json.dumps(response.json()))
+
     def assertAPIException(self, response: HttpResponse, exception):
         handler = APIExceptionsUtils(response, exception)
         data, status, headers = handler.exception_handler()
 
         self.assertEquals(response.status_code, status)
-        self.assertEquals(json.dumps(data), json.dumps(response.json()))
-        
-        for header in headers.keys():
-            value = headers.get(header)
-            self.assertEquals(response.headers.get(header), value)
+        self.assertResponseJson(response, data)
+        self.assertResponseHeaders(response, headers)
 
     def assertOneOfAPIExceptions(self, response: HttpResponse, exceptions: List[any]):
         found_one = False
@@ -64,25 +71,39 @@ class AssertAuthenticationMixin:
         else:
             authentication_class = self.authentication_class
 
-        return authentication_class(self.client)
+        return authentication_class(self)
 
     def authenticate(self, user: Model):
         return self.authentication.authenticate(user)
     
+    def assertUnauthenticated(self, response):
+        if not hasattr(self, 'assertOneOfAPIExceptions'):
+            raise AttributeError((
+                "To use assertUnauthenticated, assertOneOfAPIExceptions should be present. "
+                "Add AssertAPIExceptionMixin to list of inherits mixins of your TestCase."
+            ))
+        
+        if not self.authentication.unauthentication_exceptions:
+            raise AttributeError((
+                "None APIException provided into the unauthentication_exceptions field of "
+                "the AuthenticationBase."
+            ))
+        
+        exceptions = self.authentication.unauthentication_exceptions
+        self.assertOneOfAPIExceptions(response, exceptions)
+
     def assertAuthenticationFailed(self, response):
         if not hasattr(self, 'assertOneOfAPIExceptions'):
-            msg = (
+            raise AttributeError((
                 "To use assertAuthenticationFailed, assertOneOfAPIExceptions should be present. "
                 "Add AssertAPIExceptionMixin to list of inherits mixins of your TestCase."
-            )
-            raise AttributeError(msg)
+            ))
         
         if not self.authentication.authentication_failed_exceptions:
-            msg = (
+            raise AttributeError((
                 "None APIException provided into the authentication_failed_exceptions field of "
                 "the AuthenticationBase."
-            )
-            raise AttributeError(msg)
+            ))
         
         exceptions = self.authentication.authentication_failed_exceptions
         self.assertOneOfAPIExceptions(response, exceptions)
