@@ -13,6 +13,8 @@ from .errors import (
 class SimpleJWTAuthentication(AuthenticationBase):
     authentication_failed_exceptions = [
         NO_ACTIVE_ACCOUNT,
+    ]
+    unauthentication_exceptions = [
         TWO_AUTORIZATION_PARTS,
         TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE,
     ]
