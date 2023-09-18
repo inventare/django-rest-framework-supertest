@@ -28,7 +28,23 @@ TOKEN_NO_RECOGNIZABLE_USER_ID = jwt_exceptions.InvalidToken(
     _("Token contained no recognizable user identification")
 )
 
+USER_NOT_FOUND = jwt_exceptions.AuthenticationFailed(
+    _("User not found"),
+    code="user_not_found"
+)
+
+USER_IS_INACTIVE = jwt_exceptions.AuthenticationFailed(
+    _("User is inactive"),
+    code="user_inactive"
+)
+
+USER_PASSWORD_CHANGED = jwt_exceptions.AuthenticationFailed(
+    _("The user's password has been changed."),
+    code="password_changed"
+)
+
 __all__ = [
     'NO_ACTIVE_ACCOUNT', 'TWO_AUTORIZATION_PARTS', 'TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE',
-    'TOKEN_NO_RECOGNIZABLE_USER_ID',
+    'TOKEN_NO_RECOGNIZABLE_USER_ID', 'USER_NOT_FOUND', 'USER_IS_INACTIVE',
+    'USER_PASSWORD_CHANGED'
 ]

@@ -9,6 +9,8 @@ from .errors import (
     TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE,
     TWO_AUTORIZATION_PARTS,
     TOKEN_NO_RECOGNIZABLE_USER_ID,
+    USER_NOT_FOUND,
+    USER_IS_INACTIVE,
 )
 
 class SimpleJWTAuthentication(AuthenticationBase):
@@ -19,6 +21,8 @@ class SimpleJWTAuthentication(AuthenticationBase):
         TWO_AUTORIZATION_PARTS,
         TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE,
         TOKEN_NO_RECOGNIZABLE_USER_ID,
+        USER_NOT_FOUND,
+        USER_IS_INACTIVE,
     ]
 
     def authenticate(self, user: Optional[Model]):
