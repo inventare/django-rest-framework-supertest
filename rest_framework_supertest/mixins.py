@@ -6,18 +6,30 @@ from django.utils.module_loading import import_string
 from rest_framework_supertest.utils.exceptions import APIExceptionsUtils
 from rest_framework_supertest.authentication import AuthenticationBase
 
-class AssertAPIExceptionMixin:
+
+class AssertAPIResponseMixin:
     def assertResponseHeaders(self, response: HttpResponse, headers):
-        # TODO: move from here to another mixin
         for header in headers.keys():
             value = headers.get(header)
             self.assertEquals(response.headers.get(header), value)
     
     def assertResponseJson(self, response: HttpResponse, data: dict):
-        # TODO: move from here to another mixin
         return self.assertEquals(json.dumps(data), json.dumps(response.json()))
 
+
+class AssertAPIExceptionMixin:
     def assertAPIException(self, response: HttpResponse, exception):
+        if not hasattr(self, 'assertResponseJson'):
+            raise AttributeError(
+                "To use assertAPIException method, assertResponseJson must be present in the TestCase. "
+                "Extends AssertAPIResponseMixin on your TestCase"
+            )
+        if not hasattr(self, 'assertResponseHeaders'):
+            raise AttributeError(
+                "To use assertAPIException method, assertResponseHeaders must be present in the TestCase. "
+                "Extends AssertAPIResponseMixin on your TestCase"
+            )
+
         handler = APIExceptionsUtils(response, exception)
         data, status, headers = handler.exception_handler()
 
