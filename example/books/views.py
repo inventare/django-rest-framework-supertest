@@ -7,4 +7,4 @@ class LoggedAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response()
+        return Response({})
