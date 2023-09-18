@@ -1,19 +1,19 @@
 from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.serializers import TokenObtainSerializer
-from rest_framework_simplejwt import exceptions as jwt_exceptions
-from rest_framework import exceptions
+from rest_framework_simplejwt.exceptions import InvalidToken, AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed as BaseAuthenticationFailed
 
-NO_ACTIVE_ACCOUNT = exceptions.AuthenticationFailed(
+NO_ACTIVE_ACCOUNT = BaseAuthenticationFailed(
     TokenObtainSerializer.default_error_messages["no_active_account"],
     "no_active_account",
 )
 
-TWO_AUTORIZATION_PARTS = jwt_exceptions.AuthenticationFailed(
+TWO_AUTORIZATION_PARTS = AuthenticationFailed(
     _("Authorization header must contain two space-delimited values"),
     code="bad_authorization_header",
 )
 
-TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE = jwt_exceptions.InvalidToken({
+TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE = InvalidToken({
     "detail": _("Given token not valid for any token type"),
     "messages": [
         {
@@ -24,21 +24,21 @@ TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE = jwt_exceptions.InvalidToken({
     ],
 })
 
-TOKEN_NO_RECOGNIZABLE_USER_ID = jwt_exceptions.InvalidToken(
+TOKEN_NO_RECOGNIZABLE_USER_ID = InvalidToken(
     _("Token contained no recognizable user identification")
 )
 
-USER_NOT_FOUND = jwt_exceptions.AuthenticationFailed(
+USER_NOT_FOUND = AuthenticationFailed(
     _("User not found"),
     code="user_not_found"
 )
 
-USER_IS_INACTIVE = jwt_exceptions.AuthenticationFailed(
+USER_IS_INACTIVE = AuthenticationFailed(
     _("User is inactive"),
     code="user_inactive"
 )
 
-USER_PASSWORD_CHANGED = jwt_exceptions.AuthenticationFailed(
+USER_PASSWORD_CHANGED = AuthenticationFailed(
     _("The user's password has been changed."),
     code="password_changed"
 )
