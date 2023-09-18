@@ -11,6 +11,7 @@ from .errors import (
     TOKEN_NO_RECOGNIZABLE_USER_ID,
     USER_NOT_FOUND,
     USER_IS_INACTIVE,
+    USER_PASSWORD_CHANGED,
 )
 
 class SimpleJWTAuthentication(AuthenticationBase):
@@ -23,6 +24,7 @@ class SimpleJWTAuthentication(AuthenticationBase):
         TOKEN_NO_RECOGNIZABLE_USER_ID,
         USER_NOT_FOUND,
         USER_IS_INACTIVE,
+        USER_PASSWORD_CHANGED,
     ]
 
     def authenticate(self, user: Optional[Model]):
