@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[466],{2792:s=>{s.exports=JSON.parse('{"label":"hola","permalink":"/django-rest-framework-supertest/blog/tags/hola","allTagsPath":"/django-rest-framework-supertest/blog/tags","count":1}')}}]);
