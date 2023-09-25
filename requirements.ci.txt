@@ -1,0 +1,4 @@
+djangorestframework
+Faker
+Pillow
+djangorestframework-simplejwt
