@@ -4,9 +4,9 @@ from rest_framework import status
 
 class AssertAPIValidationMixin:
     def assertHasValidationField(self, 
-                              response: HttpResponse, 
-                              fieldPath: Union[List[Union[str, int]], str], 
-                              messages: Union[List[str], str]):
+            response: HttpResponse, 
+            fieldPath: Union[List[Union[str, int]], str], 
+            messages: Union[List[str], str]):
         if type(fieldPath) == str:
             fieldPath = [fieldPath]
 
@@ -15,7 +15,7 @@ class AssertAPIValidationMixin:
             
         self.assertEquals(response.status_code, status.HTTP_400_BAD_REQUEST)
         data = response.json()
-        for path in data:
+        for path in fieldPath:
             data = data[path]
 
         self.assertEquals(data, messages)
