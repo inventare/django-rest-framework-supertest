@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.serializers import ValidationError
 
-def get_validation_response(self, serializer):
+def get_validation_response(serializer):
     data = '{}'
     try:
         serializer.is_valid(raise_exception=True)
