@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.test.utils import override_settings
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 def add_providers(fake):
     pass
