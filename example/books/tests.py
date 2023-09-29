@@ -130,3 +130,9 @@ class BookTestAPITestCase(APITestCase):
         self.assertAPIException(response, USER_IS_INACTIVE)
         self.assertUnauthenticated(response)
 
+    def test_validation(self):
+        my_user = create_faker(User)
+        self.authenticate(my_user)
+
+        response = self.client.post('/api/logged/', {})
+        self.assertHasValidationField(response, 'email', 'This field is required.')
