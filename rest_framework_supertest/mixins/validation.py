@@ -1,6 +1,7 @@
 from typing import List, Union, Optional
 from django.http import HttpResponse
 from rest_framework import status
+from rest_framework.exceptions import ValidationError
 
 class AssertAPIValidationMixin:
     def assertHasValidationField(self, 
@@ -22,3 +23,14 @@ class AssertAPIValidationMixin:
             self.assertTrue(len(data) > 0)
         else:
             self.assertEquals(data, messages)
+
+    def assertValidationResponse(self, response: HttpResponse, data):
+        if not hasattr(self, 'assertAPIException'):
+            msg = (
+                "To use assertValidationResponse method, assertAPIException should be disponible on test case. "
+                "To turn it disponible, add AssertAPIExceptionMixin to the inherit classes of your TestCase"
+            )
+            raise AttributeError(msg)
+        
+        exception = ValidationError(data)
+        self.assertAPIException(response, exception)
