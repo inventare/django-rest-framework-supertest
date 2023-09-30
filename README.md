@@ -16,7 +16,7 @@ Under the hood, this is only an set of utilities and this uses some libraries to
 
 - [x] Add Basic Faker Support
 - [x] Assertions APIExceptions
-- [ ] Assert Validation Errors
+- [x] Assert Validation Errors
 - [ ] Assert Serializer Responses
 - [ ] Work with multiple types of Authentication
 - [ ] Work with pagination
