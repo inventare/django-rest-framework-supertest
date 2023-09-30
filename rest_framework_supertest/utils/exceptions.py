@@ -11,7 +11,7 @@ class APIExceptionsUtils:
 
     def __init__(self, response: HttpResponse, exception):
         self.response = response
-        self.request = response.wsgi_request
+        self.request = getattr(response, 'wsgi_request', None)
         self.exc = exception
         self.transform_exception()
 
@@ -22,6 +22,9 @@ class APIExceptionsUtils:
             self.exc = exceptions.PermissionDenied(*(self.exc.args))
     
     def get_authenticate_header(self):
+        if not self.request:
+            return None
+        
         path = self.request.path
         view_function, _, _ = resolve(path)
         view_class = view_function.view_class
