@@ -45,3 +45,21 @@ class ATestCase(TestCase):
         
         case = APITestCase()
         case.assertHasValidationField(response, ['childs', 1, 'name'], 'This field is required.')
+
+    def test_validation_field_inside_array_without_message(self):
+        class Child(serializers.Serializer):
+            name = serializers.CharField()
+
+        class Serializer(serializers.Serializer):
+            childs = Child(many=True)
+        
+        serializer = Serializer(data={
+            'childs': [
+                { 'name': 'aaa' },
+                {}
+            ]
+        })
+        response = get_validation_response(serializer)
+        
+        case = APITestCase()
+        case.assertHasValidationField(response, ['childs', 1, 'name'])
