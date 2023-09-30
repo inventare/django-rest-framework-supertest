@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Optional
 from django.http import HttpResponse
 from rest_framework import status
 
@@ -6,7 +6,7 @@ class AssertAPIValidationMixin:
     def assertHasValidationField(self, 
             response: HttpResponse, 
             fieldPath: Union[List[Union[str, int]], str], 
-            messages: Union[List[str], str]):
+            messages: Optional[Union[List[str], str]]=None):
         if type(fieldPath) == str:
             fieldPath = [fieldPath]
 
@@ -18,5 +18,7 @@ class AssertAPIValidationMixin:
         for path in fieldPath:
             data = data[path]
 
-        self.assertEquals(data, messages)
-
+        if not messages:
+            self.assertTrue(len(data) > 0)
+        else:
+            self.assertEquals(data, messages)
