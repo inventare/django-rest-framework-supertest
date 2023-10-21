@@ -1,4 +1,3 @@
-from typing import Any
 from unittest.mock import MagicMock
 
 class FakerMockMixin:
@@ -10,7 +9,7 @@ class FakerMockMixin:
             last = getattr(last, path)
         return fake, last
     
-    def exec_test(self, paths: list[str], module: Any, function_name: str, **kwargs):
+    def exec_test(self, paths, module, function_name, **kwargs):
         fake, mock = self.get_faker_mock(paths)
 
         fn = getattr(module, function_name)
