@@ -1,6 +1,6 @@
 from django.test import TestCase
 from rest_framework_supertest.shotcuts import person
-from ._utils import FakerMockMixin
+from .base import FakerMockMixin
 
 class PersonShotcuts(FakerMockMixin, TestCase):
     def test_first_name(self):

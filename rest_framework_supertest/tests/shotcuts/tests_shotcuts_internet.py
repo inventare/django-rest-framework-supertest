@@ -1,6 +1,6 @@
 from django.test import TestCase
 from rest_framework_supertest.shotcuts import internet
-from ._utils import FakerMockMixin
+from .base import FakerMockMixin
 
 class InternetShotcuts(FakerMockMixin, TestCase):
     def test_email(self):
