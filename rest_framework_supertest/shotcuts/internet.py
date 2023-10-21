@@ -12,9 +12,9 @@ def domain_name(fake, levels=1):
     """Generates a domain name"""
     return fake.domain_name(levels=levels)
 
-def unique_domain_name(fake):
+def unique_domain_name(fake, levels=1):
     """Generates a unique domain name"""
-    return unique(fake, domain_name)
+    return unique(fake, domain_name, levels=levels)
 
 def domain_word(fake):
     """Generates a domain word"""
