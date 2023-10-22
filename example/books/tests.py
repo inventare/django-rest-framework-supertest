@@ -16,6 +16,7 @@ from django.http import Http404
 from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.serializers import TokenObtainSerializer
 from rest_framework_simplejwt import exceptions as jwt_exceptions
+from rest_framework_supertest import shotcuts
 from django.contrib.auth import get_user_model
 
 
@@ -54,9 +55,9 @@ class BookTestAPITestCase(APITestCase):
     def setUp(self) -> None:
         setup_faker_fields(
             User,
-            username=lambda faker: faker.word(),
-            email=lambda faker: faker.email(),
-            password=lambda faker: faker.word(),
+            username=shotcuts.word,
+            email=shotcuts.unique_email,
+            password=shotcuts.word,
         )
 
         return super().setUp()
