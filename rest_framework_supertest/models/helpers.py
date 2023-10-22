@@ -10,6 +10,16 @@ def setup_faker_fields(model_class, **kwargs: dict):
     keys = kwargs.keys()
     for field in keys:
         func = kwargs.get(field)
+        args = {}
+        try:
+            _ = [el for el in func]
+        except TypeError:
+            pass
+        else:
+            func = func.get(0)
+            args = func.get(1) or {}
+        
         model_class.faker_fields[field] = func
+        model_class.faker_args[field] = args
 
     return model_class
