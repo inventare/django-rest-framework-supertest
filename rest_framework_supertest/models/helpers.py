@@ -6,6 +6,8 @@ def setup_faker_fields(model_class, **kwargs: dict):
     
     if not hasattr(model_class, 'faker_fields'):
         model_class.faker_fields = {}
+    if not hasattr(model_class, 'faker_args'):
+        model_class.faker_args = {}
 
     keys = kwargs.keys()
     for field in keys:
