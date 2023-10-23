@@ -18,8 +18,7 @@ def setup_faker_fields(model_class, **kwargs: dict):
         except TypeError:
             pass
         else:
-            func = func.get(0)
-            args = func.get(1) or {}
+            func, args = func
         
         model_class.faker_fields[field] = func
         model_class.faker_args[field] = args
