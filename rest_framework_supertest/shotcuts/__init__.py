@@ -7,3 +7,4 @@ from .job import *
 from .emojis import *
 from .credit_card import *
 from .addresses import *
+from .phone_numbers import *
