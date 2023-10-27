@@ -2,3 +2,4 @@ djangorestframework
 Faker
 Pillow
 djangorestframework-simplejwt
+coverage
