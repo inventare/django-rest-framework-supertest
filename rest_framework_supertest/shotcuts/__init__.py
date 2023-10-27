@@ -10,3 +10,4 @@ from .addresses import *
 from .phone_numbers import *
 from .currency import *
 from .geo import *
+from .file import *
