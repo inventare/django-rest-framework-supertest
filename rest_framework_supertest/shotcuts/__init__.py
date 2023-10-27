@@ -9,3 +9,4 @@ from .credit_card import *
 from .addresses import *
 from .phone_numbers import *
 from .currency import *
+from .geo import *
