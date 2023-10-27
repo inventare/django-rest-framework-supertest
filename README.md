@@ -2,6 +2,11 @@
 
 An **WORK IN PROGRESS** set of utilities to write automated tests for APIS writen in django-rest-framework.
 
+<p align="center">
+    <a href='https://github.com/inventare/django-rest-framework-supertest/actions/workflows/tests.yml'><img alt="GitHub Workflow Status (with event)" src="https://img.shields.io/github/actions/workflow/status/inventare/django-rest-framework-supertest/tests.yml?label=tests" /></a>
+    <a href='https://coveralls.io/github/inventare/django-rest-framework-supertest?branch=main'><img src='https://coveralls.io/repos/github/inventare/django-rest-framework-supertest/badge.svg?branch=main' alt='Coverage Status' /></a>
+</p>
+
 ## Motivation
 
 The **django** and **django-rest-framework** is an powerfull set of tools to create **REST API's**. But, testing these **API'**, with automated tests, are a little more complex question. Write a lot of repeated code and the difficult to made all assertions along the **REST API's** responses is some of these problems for our apps.
