@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import addresses
+from rest_framework_supertest.shortcuts import addresses
 from .base import FakerMockMixin
 
-class AddressesShotcuts(FakerMockMixin, TestCase):
+class AddressesShortcutsTests(FakerMockMixin, TestCase):
     def test_address(self):
         self.exec_test(['address'], addresses, 'address')
 

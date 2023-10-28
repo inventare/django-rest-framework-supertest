@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import internet
+from rest_framework_supertest.shortcuts import internet
 from .base import FakerMockMixin
 
-class InternetShotcuts(FakerMockMixin, TestCase):
+class InternetShortcutsTests(FakerMockMixin, TestCase):
     def test_email(self):
         safe = False,
         domain = 'any.com'

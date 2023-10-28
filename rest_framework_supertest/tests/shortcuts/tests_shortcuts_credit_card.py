@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import credit_card
+from rest_framework_supertest.shortcuts import credit_card
 from .base import FakerMockMixin
 
-class CreditCardShotcuts(FakerMockMixin, TestCase):
+class CreditCardShortcutsTests(FakerMockMixin, TestCase):
     def test_credit_card_expire(self):
         self.exec_test(['credit_card_expire'], credit_card, 'credit_card_expire')
 

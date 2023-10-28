@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import emojis
+from rest_framework_supertest.shortcuts import emojis
 from .base import FakerMockMixin
 
-class EmojiShotcuts(FakerMockMixin, TestCase):
+class EmojiShortcutsTests(FakerMockMixin, TestCase):
     def test_emoji(self):
         self.exec_test(['emoji'], emojis, 'emoji')
 

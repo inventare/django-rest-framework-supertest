@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import job
+from rest_framework_supertest.shortcuts import job
 from .base import FakerMockMixin
 
-class JobShotcuts(FakerMockMixin, TestCase):
+class JobShortcutsTests(FakerMockMixin, TestCase):
     def test_job(self):
         self.exec_test(['job'], job, 'job_name')
 

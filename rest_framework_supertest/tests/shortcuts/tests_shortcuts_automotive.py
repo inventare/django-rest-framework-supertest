@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import automotive
+from rest_framework_supertest.shortcuts import automotive
 from .base import FakerMockMixin
 
-class AutomotiveShotcuts(FakerMockMixin, TestCase):
+class AutomotiveShortcutsTests(FakerMockMixin, TestCase):
     def test_license_plate(self):
         self.exec_test(['license_plate'], automotive, 'license_plate')
 

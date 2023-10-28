@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import isbn
+from rest_framework_supertest.shortcuts import isbn
 from .base import FakerMockMixin
 
-class ISBNShotcuts(FakerMockMixin, TestCase):
+class ISBNShortcutsTests(FakerMockMixin, TestCase):
     def test_isbn10(self):
         separator = "@"
         self.exec_test(['isbn10'], isbn, 'isbn10', separator=separator)
