@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import geo
+from rest_framework_supertest.shortcuts import geo
 from .base import FakerMockMixin
 
-class GeoShotcuts(FakerMockMixin, TestCase):
+class GeoShortcutsTests(FakerMockMixin, TestCase):
     def test_coordinate(self):
         center = 50
         radius = 20

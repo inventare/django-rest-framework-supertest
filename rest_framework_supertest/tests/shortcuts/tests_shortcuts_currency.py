@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import currency
+from rest_framework_supertest.shortcuts import currency
 from .base import FakerMockMixin
 
-class CurrencyShotcuts(FakerMockMixin, TestCase):
+class CurrencyShortcutsTests(FakerMockMixin, TestCase):
     def test_cryptocurrency_code(self):
         self.exec_test(['cryptocurrency_code'], currency, 'cryptocurrency_code')
 

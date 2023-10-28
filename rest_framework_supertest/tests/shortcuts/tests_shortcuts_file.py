@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import file
+from rest_framework_supertest.shortcuts import file
 from .base import FakerMockMixin
 
-class FileShotcuts(FakerMockMixin, TestCase):
+class FileShortcutsTests(FakerMockMixin, TestCase):
     def test_file_extension(self):
         category = "image"
         self.exec_test(['file_extension'], file, 'file_extension', category=category)

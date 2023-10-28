@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import phone_numbers
+from rest_framework_supertest.shortcuts import phone_numbers
 from .base import FakerMockMixin
 
-class PhoneNumbersShotcuts(FakerMockMixin, TestCase):
+class PhoneNumbersShortcutsTests(FakerMockMixin, TestCase):
     def test_phone_number(self):
         self.exec_test(['phone_number'], phone_numbers, 'phone_number')
 

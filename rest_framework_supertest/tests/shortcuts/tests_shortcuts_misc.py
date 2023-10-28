@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import misc
+from rest_framework_supertest.shortcuts import misc
 from .base import FakerMockMixin
 
-class MiscShotcuts(FakerMockMixin, TestCase):
+class MiscShortcutsTests(FakerMockMixin, TestCase):
     def test_boolean(self):
         chance_of_getting_true = 40
         self.exec_test(['boolean'], misc, 'boolean', chance_of_getting_true=chance_of_getting_true)

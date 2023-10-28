@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import person
+from rest_framework_supertest.shortcuts import person
 from .base import FakerMockMixin
 
-class PersonShotcuts(FakerMockMixin, TestCase):
+class PersonShortcutsTests(FakerMockMixin, TestCase):
     def test_first_name(self):
         self.exec_test(['first_name'], person, 'first_name')
 

@@ -1,8 +1,8 @@
 from django.test import TestCase
-from rest_framework_supertest.shotcuts import lorem
+from rest_framework_supertest.shortcuts import lorem
 from .base import FakerMockMixin
 
-class LoremShotcuts(FakerMockMixin, TestCase):
+class LoremShortcutsTests(FakerMockMixin, TestCase):
     def test_paragraph(self):
         nb_sentences = 10
         variable_nb_sentences = True
