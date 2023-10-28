@@ -27,12 +27,12 @@ To use the shortcuts is very easy, using the `@faker_fields` decorator:
 
 ```python
 from django.db import models
-from rest_framework_supertest import shotcuts
+from rest_framework_supertest import shortcuts
 from rest_framework_supertest.models.decorators import faker_fields
 
 @faker_fields(
-    title=shotcuts.name,
-    mime=(shotcuts.mime_type, { 'category': 'audio' })
+    title=shortcuts.name,
+    mime=(shortcuts.mime_type, { 'category': 'audio' })
 )
 class Book(models.Model):
     title = models.CharField()
@@ -45,6 +45,6 @@ When this ADR was created, we have some related issues for this decision:
 
 - [#21 [feature] create an shortcut module and define methods to basic faker methods](https://github.com/inventare/django-rest-framework-supertest/issues/21)
 - [#45 [feature] add support for parsing arguments to fake function](https://github.com/inventare/django-rest-framework-supertest/issues/45)
-- [#47 [documentation] explain better arguments of faker shotcuts](https://github.com/inventare/django-rest-framework-supertest/issues/47)
-- [#62 [feature] create shotcuts for file generation faker with real support for directly set model files](https://github.com/inventare/django-rest-framework-supertest/issues/62)
-- [#63 [feature] create json shotcuts](https://github.com/inventare/django-rest-framework-supertest/issues/63)
+- [#47 [documentation] explain better arguments of faker shortcuts](https://github.com/inventare/django-rest-framework-supertest/issues/47)
+- [#62 [feature] create shortcuts for file generation faker with real support for directly set model files](https://github.com/inventare/django-rest-framework-supertest/issues/62)
+- [#63 [feature] create json shortcuts](https://github.com/inventare/django-rest-framework-supertest/issues/63)
