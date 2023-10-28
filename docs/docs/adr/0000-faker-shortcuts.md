@@ -13,6 +13,7 @@ To use only one `faker.Fake` instance we decided to parse this as the **first ar
 - Easy to set the methods in the `@faker_fields` decorator.
 - The shortcuts can receive arguments to configure the faker methods.
 - Must include the most part of standard providers of the faker.
+- The shortcuts should be used to directly set the value to an field.
 
 ## Decision
 
