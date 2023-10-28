@@ -2,7 +2,7 @@ from django.test import TestCase
 from rest_framework_supertest.shortcuts import colors
 from .base import FakerMockMixin
 
-class ColorShortcutsTests(FakerMockMixin, TestCase):
+class ColorsShortcutsTests(FakerMockMixin, TestCase):
     def test_color(self):
         hue = 180
         luminosity = 'dark'
