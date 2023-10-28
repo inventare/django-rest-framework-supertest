@@ -1,8 +1,6 @@
 from typing import Optional
 from django.db.models import Model
-from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.tokens import AccessToken
-from rest_framework_simplejwt import exceptions as jwt_exceptions
 from rest_framework_supertest.authentication import AuthenticationBase
 from .errors import (
     NO_ACTIVE_ACCOUNT,
