@@ -12,3 +12,4 @@ from .currency import *
 from .geo import *
 from .file import *
 from .misc import *
+from .colors import *
