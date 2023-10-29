@@ -1,5 +1,6 @@
 from unittest.mock import MagicMock
 
+
 class FakerMockMixin:
     def get_faker_mock(self, paths=[]):
         fake = MagicMock()
@@ -8,7 +9,7 @@ class FakerMockMixin:
             setattr(last, path, MagicMock())
             last = getattr(last, path)
         return fake, last
-    
+
     def exec_test(self, paths, module, function_name, **kwargs):
         fake, mock = self.get_faker_mock(paths)
 

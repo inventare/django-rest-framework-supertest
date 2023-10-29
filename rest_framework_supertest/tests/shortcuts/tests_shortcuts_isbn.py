@@ -1,6 +1,9 @@
 from django.test import TestCase
+
 from rest_framework_supertest.shortcuts import isbn
+
 from .base import FakerMockMixin
+
 
 class ISBNShortcutsTests(FakerMockMixin, TestCase):
     def test_isbn10(self):

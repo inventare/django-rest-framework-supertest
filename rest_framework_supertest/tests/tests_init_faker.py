@@ -1,6 +1,8 @@
+from unittest.mock import patch
+
 from django.test import TestCase
 from django.test.utils import override_settings
-from unittest.mock import patch
+
 
 def add_providers(fake):
     pass
@@ -21,7 +23,7 @@ class InitFakerTestCase(TestCase):
         fake = initialize_faker()
         mock.assert_called_once()
         self.assertIsNotNone(fake)
-        
+
     @override_settings(FAKER_ADD_PROVIDERS='rest_framework_supertest.tests.tests_init_faker.fake')
     def test_setup_init_providers_with_invalid_func(self):
         from rest_framework_supertest.utils.faker.initializer import initialize_faker

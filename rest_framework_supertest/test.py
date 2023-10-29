@@ -1,10 +1,12 @@
 from rest_framework.test import APITestCase as BaseAPITestCase
+
 from rest_framework_supertest.mixins import (
-    AssertAPIResponseMixin,
     AssertAPIExceptionMixin,
-    AssertAuthenticationMixin,
+    AssertAPIResponseMixin,
     AssertAPIValidationMixin,
+    AssertAuthenticationMixin,
 )
+
 
 class APITestCase(
     AssertAPIResponseMixin,

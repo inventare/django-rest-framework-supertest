@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def job_name(fake):
     """Generate a job name."""
     return fake.job()

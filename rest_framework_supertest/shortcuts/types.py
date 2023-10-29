@@ -1,5 +1,5 @@
-from typing import Union
 import datetime
+from typing import Union
 
 # TODO: ListOfInt: TypeAlias = list[int]
 

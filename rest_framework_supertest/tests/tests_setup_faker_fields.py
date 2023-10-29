@@ -1,6 +1,7 @@
-from django.test import TestCase
 from django.contrib.auth import get_user_model
-from rest_framework_supertest.models import helpers, decorators
+from django.test import TestCase
+
+from rest_framework_supertest.models import decorators, helpers
 
 User = get_user_model()
 
@@ -13,7 +14,7 @@ class SetupFakerFieldsTestCase(TestCase):
             del User.faker_fields
         if hasattr(User, 'faker_args'):
             del User.faker_args
-    
+
     def test_call_setup_faker_fields_without_model(self):
         with self.assertRaises(ValueError):
             helpers.setup_faker_fields(EmptyClass)
@@ -71,7 +72,7 @@ class SetupFakerFieldsTestCase(TestCase):
     def test_decorator_faker__fields_without_fields(self):
         wrap = decorators.faker_fields()
         wrap(User)
-        
+
         self.assertEqual(User.faker_fields, {})
         self.assertEqual(User.faker_args, {})
 
@@ -79,7 +80,7 @@ class SetupFakerFieldsTestCase(TestCase):
         fn = lambda faker: 'any-value-here'
         wrap = decorators.faker_fields(username=fn)
         wrap(User)
-        
+
         self.assertEqual(User.faker_fields, { 'username': fn })
         self.assertEqual(User.faker_args, { 'username': {} })
 
@@ -87,7 +88,7 @@ class SetupFakerFieldsTestCase(TestCase):
         fn = lambda faker: 'any-value-here'
         wrap = decorators.faker_fields(username=(fn, { 'a': False }))
         wrap(User)
-        
+
         self.assertEqual(User.faker_fields, { 'username': fn })
         self.assertEqual(User.faker_args, { 'username': { 'a': False } })
 
@@ -96,7 +97,7 @@ class SetupFakerFieldsTestCase(TestCase):
         fn_first_name = lambda faker: 'here'
         wrap = decorators.faker_fields(username=fn_username, first_name=fn_first_name)
         wrap(User)
-        
+
         self.assertEqual(User.faker_fields, { 'username': fn_username, 'first_name': fn_first_name })
         self.assertEqual(User.faker_args, { 'username': {}, 'first_name': {} })
 
@@ -105,6 +106,6 @@ class SetupFakerFieldsTestCase(TestCase):
         fn_first_name = lambda faker: 'here'
         wrap = decorators.faker_fields(username=(fn_username, { 'a': 'B' }), first_name=fn_first_name)
         wrap(User)
-        
+
         self.assertEqual(User.faker_fields, { 'username': fn_username, 'first_name': fn_first_name })
         self.assertEqual(User.faker_args, { 'username': { 'a': 'B' }, 'first_name': {} })

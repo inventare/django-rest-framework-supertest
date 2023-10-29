@@ -1,6 +1,9 @@
 from django.test import TestCase
+
 from rest_framework_supertest.shortcuts import jobs
+
 from .base import FakerMockMixin
+
 
 class JobsShortcutsTests(FakerMockMixin, TestCase):
     def test_job(self):

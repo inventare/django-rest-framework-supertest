@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def first_name(fake):
     """Generates a first name"""
     return fake.first_name()

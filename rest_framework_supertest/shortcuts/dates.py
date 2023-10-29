@@ -1,7 +1,9 @@
 import datetime
 from typing import Optional
+
 from ._utils import unique
-from .types import DateTimeOptionalArg, DateTimeArg
+from .types import DateTimeArg, DateTimeOptionalArg
+
 
 def am_pm(fake):
     """Generate a AM or PM string."""
@@ -18,7 +20,7 @@ def unique_century(fake):
 def date(fake, pattern="%Y-%m-%d", end_datetime=None):
     """
     Get a date string between January 1, 1970 and now.
-    
+
     Args:
         pattern: Format of the date (year-month-day by default)
 
@@ -30,7 +32,7 @@ def date(fake, pattern="%Y-%m-%d", end_datetime=None):
 def unique_date(fake, pattern="%Y-%m-%d", end_datetime=None):
     """
     Get a unique date string between January 1, 1970 and now.
-    
+
     Args:
         - pattern: Format of the date (year-month-day by default)
 
@@ -166,7 +168,7 @@ def date_this_decade(fake, before_today=True, after_today=False):
     Args:
         - before_today: include days in current decade before today
         - after_today: include days in current decade after today
-    
+
     Returns:
         A date
     """
@@ -179,7 +181,7 @@ def unique_date_this_decade(fake, before_today=True, after_today=False):
     Args:
         - before_today: include days in current decade before today
         - after_today: include days in current decade after today
-    
+
     Returns:
         A date
     """
@@ -192,7 +194,7 @@ def date_this_month(fake, before_today=True, after_today=False):
     Args:
         - before_today: include days in current month before today
         - after_today: include days in current month after today
-    
+
     Returns:
         A date
     """
@@ -205,7 +207,7 @@ def unique_date_this_month(fake, before_today=True, after_today=False):
     Args:
         - before_today: include days in current month before today
         - after_today: include days in current month after today
-    
+
     Returns:
         A date
     """
@@ -218,7 +220,7 @@ def date_this_year(fake, before_today=True, after_today=False):
     Args:
         - before_today: include days in current year before today
         - after_today: include days in current year after today
-    
+
     Returns:
         A date
     """
@@ -231,7 +233,7 @@ def unique_date_this_year(fake, before_today=True, after_today=False):
     Args:
         - before_today: include days in current year before today
         - after_today: include days in current year after today
-    
+
     Returns:
         A date
     """
@@ -319,7 +321,7 @@ def date_time_between_dates(
     fake,
     datetime_start: DateTimeOptionalArg = None,
     datetime_end: DateTimeOptionalArg = None,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Takes two datetime objects and returns a random datetime
@@ -329,21 +331,21 @@ def date_time_between_dates(
         - datetime_start: datetime
         - datetime_end: datetime
         - tzinfo: timezone, instance of datetime.tzinfo subclass
-    
+
     Returns:
         A datetime
     """
     return fake.date_time_between_dates(
         datetime_start=datetime_start,
         datetime_end=datetime_end,
-        tzinfo=tzinfo
+        tzinfo=tzinfo,
     )
 
 def unique_date_time_between_dates(
     fake,
     datetime_start: DateTimeOptionalArg = None,
     datetime_end: DateTimeOptionalArg = None,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Takes two datetime objects and returns a unique random datetime
@@ -353,7 +355,7 @@ def unique_date_time_between_dates(
         - datetime_start: datetime
         - datetime_end: datetime
         - tzinfo: timezone, instance of datetime.tzinfo subclass
-    
+
     Returns:
         A datetime
     """
@@ -362,14 +364,14 @@ def unique_date_time_between_dates(
         date_time_between_dates,
         datetime_start=datetime_start,
         datetime_end=datetime_end,
-        tzinfo=tzinfo
+        tzinfo=tzinfo,
     )
 
 def date_time_this_century(
     fake,
     before_now: bool = True,
     after_now: bool = False,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Gets a datetime object for the current century.
@@ -378,7 +380,7 @@ def date_time_this_century(
         - before_now: include days in current century before today
         - after_now: include days in current century after today
         - tzinfo: timezone, instance of datetime.tzinfo subclass
-    
+
     Returns:
         A datetime
     """
@@ -388,7 +390,7 @@ def unique_date_time_this_century(
     fake,
     before_now: bool = True,
     after_now: bool = False,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Gets a unique datetime object for the current century.
@@ -397,7 +399,7 @@ def unique_date_time_this_century(
         - before_now: include days in current century before today
         - after_now: include days in current century after today
         - tzinfo: timezone, instance of datetime.tzinfo subclass
-    
+
     Returns:
         A datetime
     """
@@ -407,7 +409,7 @@ def date_time_this_decade(
     fake,
     before_now: bool = True,
     after_now: bool = False,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Gets a datetime object for the decade year.
@@ -426,7 +428,7 @@ def unique_date_time_this_decade(
     fake,
     before_now: bool = True,
     after_now: bool = False,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Gets a unique datetime object for the decade year.
@@ -445,7 +447,7 @@ def date_time_this_month(
     fake,
     before_now: bool = True,
     after_now: bool = False,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Gets a datetime object for the current month.
@@ -464,7 +466,7 @@ def unique_date_time_this_month(
     fake,
     before_now: bool = True,
     after_now: bool = False,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Gets a datetime object for the current month.
@@ -483,7 +485,7 @@ def date_time_this_year(
     fake,
     before_now: bool = True,
     after_now: bool = False,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Gets a datetime object for the current year.
@@ -502,7 +504,7 @@ def unique_date_time_this_year(
     fake,
     before_now: bool = True,
     after_now: bool = False,
-    tzinfo: Optional[datetime.tzinfo] = None
+    tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
     Gets a datetime object for the current year.
@@ -606,7 +608,7 @@ def iso8601(
     tzinfo: Optional[datetime.tzinfo] = None,
     end_datetime: DateTimeOptionalArg = None,
     sep: str = 'T',
-    timespec: str = 'auto'
+    timespec: str = 'auto',
 ) -> str:
     """
     Get a timestamp in ISO 8601 format (or one of its profiles).
@@ -616,7 +618,7 @@ def iso8601(
         - sep: separator between date and time, defaults to ‘T’
         - timespec: format specifier for the time part,
           defaults to ‘auto’ - see datetime.isoformat() documentation
-    
+
     Returns:
         A string with date into ISO 8601 format.
     """
@@ -627,7 +629,7 @@ def unique_iso8601(
     tzinfo: Optional[datetime.tzinfo] = None,
     end_datetime: DateTimeOptionalArg = None,
     sep: str = 'T',
-    timespec: str = 'auto'
+    timespec: str = 'auto',
 ) -> str:
     """
     Get a timestamp in ISO 8601 format (or one of its profiles).
@@ -637,7 +639,7 @@ def unique_iso8601(
         - sep: separator between date and time, defaults to ‘T’
         - timespec: format specifier for the time part,
           defaults to ‘auto’ - see datetime.isoformat() documentation
-    
+
     Returns:
         A string with date into ISO 8601 format.
     """

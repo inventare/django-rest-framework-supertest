@@ -1,8 +1,10 @@
 from io import BytesIO
-from PIL import Image
+from uuid import uuid4
+
 from django.core.files.base import ContentFile
 from faker.providers import BaseProvider
-from uuid import uuid4
+from PIL import Image
+
 
 class ImageProvider(BaseProvider):
     def image(self, width = 50, height = 50, color=(200, 0, 0), format='png', name=None):
@@ -10,7 +12,7 @@ class ImageProvider(BaseProvider):
         image = Image.new("RGBA", size=(width, height), color=color)
         image.save(image_file, format)
         image_file.seek(0)
-        
+
         if not name:
             name = "%s.%s" % (str(uuid4()), format)
 

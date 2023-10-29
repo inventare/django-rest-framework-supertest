@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def emoji(fake):
     """Generates a emoji"""
     return fake.emoji()

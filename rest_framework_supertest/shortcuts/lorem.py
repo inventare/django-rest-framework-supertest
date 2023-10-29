@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def paragraph(fake, nb_sentences=3, variable_nb_sentences=True, ext_word_list=None):
     """
     Generate a paragraph.
@@ -17,7 +18,7 @@ def paragraph(fake, nb_sentences=3, variable_nb_sentences=True, ext_word_list=No
     return fake.paragraph(
         nb_sentences=nb_sentences,
         variable_nb_sentences=variable_nb_sentences,
-        ext_word_list=ext_word_list
+        ext_word_list=ext_word_list,
     )
 
 def unique_paragraph(fake, nb_sentences=3, variable_nb_sentences=True, ext_word_list=None):
@@ -39,7 +40,7 @@ def unique_paragraph(fake, nb_sentences=3, variable_nb_sentences=True, ext_word_
         paragraph,
         nb_sentences=nb_sentences,
         variable_nb_sentences=variable_nb_sentences,
-        ext_word_list=ext_word_list
+        ext_word_list=ext_word_list,
     )
 
 def sentence(fake, nb_words=6, variable_nb_words=True, ext_word_list=None):
@@ -58,7 +59,7 @@ def sentence(fake, nb_words=6, variable_nb_words=True, ext_word_list=None):
     return fake.sentence(
         nb_words=nb_words,
         variable_nb_words=variable_nb_words,
-        ext_word_list=ext_word_list
+        ext_word_list=ext_word_list,
     )
 
 def unique_sentence(fake, nb_words=6, variable_nb_words=True, ext_word_list=None):
@@ -79,7 +80,7 @@ def unique_sentence(fake, nb_words=6, variable_nb_words=True, ext_word_list=None
         sentence,
         nb_words=nb_words,
         variable_nb_words=variable_nb_words,
-        ext_word_list=ext_word_list
+        ext_word_list=ext_word_list,
     )
 
 def text(fake, max_nb_chars=200, ext_word_list=None):
@@ -109,7 +110,7 @@ def unique_text(fake, max_nb_chars=200, ext_word_list=None):
 def word(fake, part_of_speech=None, ext_word_list=None):
     """
     Generate a word
-    
+
     This method uses words() under the hood with the nb argument set
     to 1 to generate the result.
     """
@@ -118,7 +119,7 @@ def word(fake, part_of_speech=None, ext_word_list=None):
 def unique_word(fake, part_of_speech=None, ext_word_list=None):
     """
     Generate a unique word
-    
+
     This method uses words() under the hood with the nb argument set
     to 1 to generate the result.
     """

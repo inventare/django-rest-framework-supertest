@@ -1,6 +1,9 @@
 from django.test import TestCase
+
 from rest_framework_supertest.shortcuts import geographicals
+
 from .base import FakerMockMixin
+
 
 class GeographicalsShortcutsTests(FakerMockMixin, TestCase):
     def test_coordinate(self):

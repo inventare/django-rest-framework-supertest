@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def country_calling_code(fake):
     """Generate a country calling code."""
     return fake.country_calling_code()

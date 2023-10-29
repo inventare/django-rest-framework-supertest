@@ -1,7 +1,9 @@
-from typing import Optional, List
+from typing import List, Optional
+
 from django.db.models import Model
 from rest_framework import exceptions
 from rest_framework.test import APIClient, APITestCase
+
 
 class AuthenticationBase:
     client: APIClient

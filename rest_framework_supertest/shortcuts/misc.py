@@ -1,4 +1,4 @@
-from ._utils import unique
+
 
 def boolean(fake, chance_of_getting_true=50):
     """Generate a random boolean value based on chance_of_getting_true"""

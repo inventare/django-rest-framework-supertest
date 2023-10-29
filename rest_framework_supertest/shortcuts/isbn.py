@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def isbn10(fake, separator="-"):
     """Generate a ISBN10."""
     return fake.isbn10(separator=separator)

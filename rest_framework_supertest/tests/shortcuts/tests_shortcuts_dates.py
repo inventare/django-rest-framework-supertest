@@ -1,11 +1,14 @@
 from django.test import TestCase
+
 from rest_framework_supertest.shortcuts import dates
+
 from .base import FakerMockMixin
+
 
 class DatesShortcutsTests(FakerMockMixin, TestCase):
     def test_am_pm(self):
         self.exec_test(['am_pm'], dates, 'am_pm')
-    
+
     def test_century(self):
         self.exec_test(['century'], dates, 'century')
 
@@ -24,12 +27,12 @@ class DatesShortcutsTests(FakerMockMixin, TestCase):
 
     def test_date_between(self):
         start_date = '-10y'
-        end_date = '+10y';
+        end_date = '+10y'
         self.exec_test(['date_between'], dates, 'date_between', start_date=start_date, end_date=end_date)
 
     def test_unique_date_between(self):
         start_date = '-10y'
-        end_date = '+10y';
+        end_date = '+10y'
         self.exec_test(['unique', 'date_between'], dates, 'unique_date_between', start_date=start_date, end_date=end_date)
 
     def test_date_between_dates(self):

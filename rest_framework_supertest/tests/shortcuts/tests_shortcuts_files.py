@@ -1,6 +1,9 @@
 from django.test import TestCase
+
 from rest_framework_supertest.shortcuts import files
+
 from .base import FakerMockMixin
+
 
 class FilesShortcutsTests(FakerMockMixin, TestCase):
     def test_file_extension(self):

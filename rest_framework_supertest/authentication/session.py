@@ -1,6 +1,9 @@
 from typing import Optional
+
 from django.contrib.auth.models import AbstractUser
+
 from .base import AuthenticationBase
+
 
 class SessionAuthentication(AuthenticationBase):
     authentication_failed_exceptions = []

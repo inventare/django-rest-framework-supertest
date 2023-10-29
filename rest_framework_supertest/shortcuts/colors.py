@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def color(fake, hue=None, luminosity=None, color_format="hex"):
     """
     Generate a color in a human-friendly way.

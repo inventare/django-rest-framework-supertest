@@ -1,30 +1,35 @@
-from typing import List
 import json
+from typing import List
+
 from django.http import HttpResponse
+from rest_framework.exceptions import APIException
+
 from rest_framework_supertest.utils.exceptions import APIExceptionsUtils
 
 
 class AssertAPIExceptionMixin:
-    def assertAPIException(self, response: HttpResponse, exception):
+    def assertAPIException(self, response: HttpResponse, exception: APIException):
         if not hasattr(self, 'assertResponseJson'):
-            raise AttributeError(
+            msg = (
                 "To use assertAPIException method, assertResponseJson must be present in the TestCase. "
-                "Extends AssertAPIResponseMixin on your TestCase"
+                "Extends AssertAPIResponseMixin on your TestCase",
             )
+            raise AttributeError(msg)
         if not hasattr(self, 'assertResponseHeaders'):
-            raise AttributeError(
+            msg = (
                 "To use assertAPIException method, assertResponseHeaders must be present in the TestCase. "
-                "Extends AssertAPIResponseMixin on your TestCase"
+                "Extends AssertAPIResponseMixin on your TestCase",
             )
+            raise AttributeError(msg)
 
         handler = APIExceptionsUtils(response, exception)
         data, status, headers = handler.exception_handler()
 
-        self.assertEquals(response.status_code, status)
+        self.assertEqual(response.status_code, status)
         self.assertResponseJson(response, data)
         self.assertResponseHeaders(response, headers)
 
-    def assertOneOfAPIExceptions(self, response: HttpResponse, exceptions: List[any]):
+    def assertOneOfAPIExceptions(self, response: HttpResponse, exceptions: List[APIException]):
         found_one = False
         for exception in exceptions:
             handler = APIExceptionsUtils(response, exception)

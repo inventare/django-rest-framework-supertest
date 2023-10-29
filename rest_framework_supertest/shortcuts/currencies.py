@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def cryptocurrency_code(fake):
     """Generate a cryptocurrency code."""
     return fake.cryptocurrency_code()

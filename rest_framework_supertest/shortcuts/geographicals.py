@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def coordinate(fake, center=None, radius=0.001):
     """
     Generate a coordinate with a optionally center

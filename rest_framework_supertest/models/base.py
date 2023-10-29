@@ -1,5 +1,7 @@
 from typing import Optional
+
 from rest_framework_supertest.utils.faker import fake
+
 
 def create_faker(model_class, data: Optional[dict] = None, save = True):
     faker_fields = model_class.faker_fields
@@ -12,7 +14,7 @@ def create_faker(model_class, data: Optional[dict] = None, save = True):
 
     if not data:
         data = {}
-        
+
     create_dict = {
         **create_dict,
         **data,

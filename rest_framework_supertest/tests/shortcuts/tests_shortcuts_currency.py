@@ -1,6 +1,9 @@
 from django.test import TestCase
+
 from rest_framework_supertest.shortcuts import currencies
+
 from .base import FakerMockMixin
+
 
 class CurrenciesShortcutsTests(FakerMockMixin, TestCase):
     def test_cryptocurrency_code(self):

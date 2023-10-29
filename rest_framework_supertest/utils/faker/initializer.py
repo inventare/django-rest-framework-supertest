@@ -1,7 +1,9 @@
-from faker import Faker
 from django.conf import settings
 from django.utils.module_loading import import_string
+from faker import Faker
+
 from rest_framework_supertest import settings as faker_settings
+
 
 def initialize_faker():
     locale = getattr(settings, 'FAKER_LOCALE', faker_settings.FAKER_LOCALE)

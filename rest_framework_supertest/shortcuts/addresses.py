@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def address(fake):
     """Generate a address."""
     return fake.address()

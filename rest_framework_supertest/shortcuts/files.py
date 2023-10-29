@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def file_extension(fake, category=None):
     """
     Generate a file extension under the specified `category`.

@@ -1,5 +1,6 @@
 from ._utils import unique
 
+
 def email(fake, safe=True, domain=None):
     """Generates a e-mail"""
     return fake.email(safe=safe, domain=domain)
@@ -48,7 +49,7 @@ def ipv4(fake, network=False, address_class=None, private=None):
         network: Network address
         address_class: IPv4 address class (a, b, or c)
         private: Public or private
-    
+
     Returns:
         IPv4
     """
@@ -62,7 +63,7 @@ def unique_ipv4(fake, network=False, address_class=None, private=None):
         network: Network address
         address_class: IPv4 address class (a, b, or c)
         private: Public or private
-    
+
     Returns:
         IPv4
     """
