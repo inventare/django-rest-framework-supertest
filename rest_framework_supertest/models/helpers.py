@@ -1,9 +1,19 @@
 from django.db import models
 
 
-def setup_faker_fields(model_class, **kwargs: dict):
+def setup_faker_fields(
+    model_class: type[models.Model],
+    **kwargs: dict
+) -> type[models.Model]:
+    """
+    Setup faker fields for an model class.
+
+    Register `faker_fields` and `faker_args` inside the model to store the
+    faker model constructor properties.
+    """
     if not issubclass(model_class, models.Model):
-        raise ValueError("Wrapped class must subclass Model.")
+        msg = "Wrapped class must subclass Model."
+        raise TypeError(msg)
 
     if not hasattr(model_class, 'faker_fields'):
         model_class.faker_fields = {}
@@ -15,7 +25,7 @@ def setup_faker_fields(model_class, **kwargs: dict):
         func = kwargs.get(field)
         args = {}
         try:
-            _ = [el for el in func]
+            _ = list(func)
         except TypeError:
             pass
         else:

@@ -22,7 +22,7 @@ class SetupFakerFieldsTestCase(TestCase):
             del User.faker_args
 
     def test_call_setup_faker_fields_without_model(self) -> None:
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             helpers.setup_faker_fields(EmptyClass)
 
     def test_call_setup_faker_without_fields(self) -> None:
@@ -82,7 +82,7 @@ class SetupFakerFieldsTestCase(TestCase):
 
     def test_decorator_faker_fields_without_model(self) -> None:
         wrap = decorators.faker_fields()
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             wrap(EmptyClass)
 
     def test_decorator_faker__fields_without_fields(self) -> None:
