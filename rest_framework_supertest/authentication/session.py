@@ -6,9 +6,16 @@ from .base import AuthenticationBase
 
 
 class SessionAuthentication(AuthenticationBase):
-    authentication_failed_exceptions = []
+    """Implements adapter to use session with `AuthenticationBase` test utils."""
+    def authenticate(self, user: Optional[AbstractUser]) -> None:
+        """
+        Authenticate an user with session.
 
-    def authenticate(self, user: Optional[AbstractUser]):
+        The method uses `APIClient.force_login()` method.
+
+        Args:
+            user: The user to authenticate.
+        """
         if not user:
             return
         self.client.force_login(user)

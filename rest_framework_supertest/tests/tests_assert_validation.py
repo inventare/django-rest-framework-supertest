@@ -16,8 +16,8 @@ class ATestCase(TestCase):
         response = get_validation_response(serializer)
 
         case = APITestCase()
-        case.assertHasValidationField(response, 'email', 'This field is required.')
-        case.assertHasValidationField(response, 'name', 'This field is required.')
+        case.assert_has_validation_field(response, 'email', 'This field is required.')
+        case.assert_has_validation_field(response, 'name', 'This field is required.')
 
     def test_basic_validation_field_without_message(self) -> None:
         class Serializer(serializers.Serializer):
@@ -28,8 +28,8 @@ class ATestCase(TestCase):
         response = get_validation_response(serializer)
 
         case = APITestCase()
-        case.assertHasValidationField(response, 'email')
-        case.assertHasValidationField(response, 'name')
+        case.assert_has_validation_field(response, 'email')
+        case.assert_has_validation_field(response, 'name')
 
     def test_validation_field_inside_array(self) -> None:
         class Child(serializers.Serializer):
@@ -47,7 +47,7 @@ class ATestCase(TestCase):
         response = get_validation_response(serializer)
 
         case = APITestCase()
-        case.assertHasValidationField(
+        case.assert_has_validation_field(
             response,
             ['childs', 1, 'name'],
             'This field is required.',
@@ -69,7 +69,7 @@ class ATestCase(TestCase):
         response = get_validation_response(serializer)
 
         case = APITestCase()
-        case.assertHasValidationField(response, ['childs', 1, 'name'])
+        case.assert_has_validation_field(response, ['childs', 1, 'name'])
 
     def test_validation_response_with_array(self) -> None:
         class Child(serializers.Serializer):
@@ -87,7 +87,7 @@ class ATestCase(TestCase):
         response = get_validation_response(serializer)
 
         case = APITestCase()
-        case.assertValidationResponse(
+        case.assert_validation_response(
             response,
             {
                 'childs': [
@@ -106,7 +106,7 @@ class ATestCase(TestCase):
         response = get_validation_response(serializer)
 
         case = APITestCase()
-        case.assertValidationResponse(
+        case.assert_validation_response(
             response,
             {
                 'email': ['This field is required.'],

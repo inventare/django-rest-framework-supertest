@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import ClassVar, Optional
 
-from django.db.models import Model
+from django.contrib.auth.models import AbstractUser
+from rest_framework.exceptions import APIException
 from rest_framework_simplejwt.tokens import AccessToken
 
 from rest_framework_supertest.authentication import AuthenticationBase
@@ -17,10 +18,16 @@ from .errors import (
 
 
 class SimpleJWTAuthentication(AuthenticationBase):
-    authentication_failed_exceptions = [
+    """
+    Implements adapter to use SimpleJWT with `AuthenticationBase` test utils.
+
+    Determinates `authenticate` function for the SimpleJWT and exceptions
+    for authentication failed and unauthentication.
+    """
+    authentication_failed_exceptions: ClassVar[list[APIException]] = [
         NO_ACTIVE_ACCOUNT,
     ]
-    unauthentication_exceptions = [
+    unauthentication_exceptions: ClassVar[list[APIException]] = [
         TWO_AUTORIZATION_PARTS,
         TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE,
         TOKEN_NO_RECOGNIZABLE_USER_ID,
@@ -29,9 +36,19 @@ class SimpleJWTAuthentication(AuthenticationBase):
         USER_PASSWORD_CHANGED,
     ]
 
-    def authenticate(self, user: Optional[Model]):
+    def authenticate(self, user: Optional[AbstractUser]) -> None:
+        """
+        Authenticate an user with SimpleJWT token.
+
+        Generates an AccessToken for the user and set HTTP_AUTHORIZATION
+        header for the TestCase client.
+
+        Args:
+            user: The user to authenticate. If the user is None, the
+              HTTP_AUTHORIZATION header is set to None.
+        """
         if not user:
-            self.client.credentials(None)
+            self.client.credentials(HTTP_AUTHORIZATION=None)
             return
 
         token = str(AccessToken.for_user(user))

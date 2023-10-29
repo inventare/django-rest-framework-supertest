@@ -15,6 +15,12 @@ class APITestCase(
     AssertAPIValidationMixin,
     BaseAPITestCase,
 ):
-    pass
+    """
+    Extended APITestCase for `rest_framework_supertest`.
+
+    Comes with the `AssertAPIResponseMixin`, `AssertAPIExceptionMixin`,
+    `AssertAuthenticationMixin` and `AssertAPIValidationMixin` mixins
+    from the `rest_framework_supertest` package.
+    """
 
 __all__ = ['APITestCase']
