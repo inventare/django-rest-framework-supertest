@@ -3,7 +3,7 @@ from django.db import models
 
 def setup_faker_fields(
     model_class: type[models.Model],
-    **kwargs: dict
+    **kwargs: dict,
 ) -> type[models.Model]:
     """
     Setup faker fields for an model class.

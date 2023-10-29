@@ -2,338 +2,471 @@ import datetime
 from typing import Optional
 
 from ._utils import unique
-from .types import DateTimeArg, DateTimeOptionalArg
+from .typing import DateParseType
 
 
-def am_pm(fake):
+def am_pm(fake: object) -> str:
     """Generate a AM or PM string."""
     return fake.am_pm()
 
-def century(fake):
-    """Generate a century"""
+def century(fake: object) -> str:
+    """Generate a century."""
     return fake.century()
 
-def unique_century(fake):
-    """Generate a unique century"""
+def unique_century(fake: object) -> str:
+    """Generate a unique century."""
     return unique(fake, century)
 
-def date(fake, pattern="%Y-%m-%d", end_datetime=None):
+def date(
+    fake: object,
+    pattern: str = "%Y-%m-%d",
+    end_datetime: Optional[DateParseType] = None,
+) -> str:
     """
-    Get a date string between January 1, 1970 and now.
+    Generate a date string between January 1, 1970 and now.
 
     Args:
-        pattern: Format of the date (year-month-day by default)
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        pattern: format of the date (year-month-day by default)
+        end_datetime: if is set, this is the max date possible.
     """
     return fake.date(pattern=pattern, end_datetime=end_datetime)
 
-def unique_date(fake, pattern="%Y-%m-%d", end_datetime=None):
+def unique_date(
+    fake: object,
+    pattern: str = "%Y-%m-%d",
+    end_datetime: Optional[DateParseType] = None,
+) -> str:
     """
-    Get a unique date string between January 1, 1970 and now.
+    Generate a unique date string between January 1, 1970 and now.
 
     Args:
-        - pattern: Format of the date (year-month-day by default)
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        pattern: format of the date (year-month-day by default)
+        end_datetime: if is set, this is the max date possible.
     """
     return unique(fake, date, pattern=pattern, end_datetime=end_datetime)
 
-def date_between(fake, start_date='-30y', end_date='today'):
+def date_between(
+    fake: object,
+    start_date: DateParseType = '-30y',
+    end_date: DateParseType = 'today',
+) -> datetime.date:
     """
-    Get a Date object based on a random date between two given dates.
-    Accepts date strings that can be recognized by strtotime().
+    Generate a date object based on a random date between two given dates.
 
     Args:
-        - start_date: Defaults to 30 years ago
-        - end_date: Defaults to “today".
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        start_date: first date of the date range to generate. Accepts
+          date strings that can be recognized by strtotime().
+        end_date: last date of the date range to generate. Accepts
+          date strings that can be recognized by strtotime().
     """
     return fake.date_between(start_date=start_date, end_date=end_date)
 
-def unique_date_between(fake, start_date='-30y', end_date='today'):
+def unique_date_between(
+    fake: object,
+    start_date: DateParseType = '-30y',
+    end_date: DateParseType = 'today',
+) -> datetime.date:
     """
-    Get a unique Date object based on a random date between two given dates.
-    Accepts date strings that can be recognized by strtotime().
+    Generate a unique date object based on a random date between two given dates.
 
     Args:
-        - start_date: Defaults to 30 years ago
-        - end_date: Defaults to “today".
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        start_date: first date of the date range to generate. Accepts
+          date strings that can be recognized by strtotime().
+        end_date: last date of the date range to generate. Accepts
+          date strings that can be recognized by strtotime().
     """
     return unique(fake, date_between, start_date=start_date, end_date=end_date)
 
-def date_between_dates(fake, date_start=None, date_end=None):
+def date_between_dates(
+    fake: object,
+    date_start: Optional[DateParseType] = None,
+    date_end: Optional[DateParseType] = None,
+) -> datetime.date:
     """
-    Takes two Date objects and returns a random date between the two given dates.
-    Accepts Date or datetime objects
+    Generate a date between two dates.
 
     Args:
-        - date_start: Date
-        - date_end: Date
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        date_start: first date of the date range to generate.
+        date_end: second date of the date range to generate.
     """
     return fake.date_between_dates(date_start=date_start, date_end=date_end)
 
-def unique_date_between_dates(fake, date_start=None, date_end=None):
+def unique_date_between_dates(
+    fake: object,
+    date_start: Optional[DateParseType] = None,
+    date_end: Optional[DateParseType] = None,
+) -> datetime.date:
     """
-    Takes two Date objects and returns a unique random date between the two given dates.
-    Accepts Date or datetime objects
+    Generate a unique date between two dates.
 
     Args:
-        - date_start: Date
-        - date_end: Date
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        date_start: first date of the date range to generate.
+        date_end: second date of the date range to generate.
     """
     return unique(fake, date_between_dates, date_start=date_start, date_end=date_end)
 
-def date_object(fake, end_datetime = None):
-    """Get a date object between January 1, 1970 and now"""
+def date_object(
+    fake: object,
+    end_datetime: Optional[DateParseType] = None,
+) -> datetime.date:
+    """
+    Generate a date object between January 1, 1970 and now.
+
+    Args:
+        fake: The `Faker` instance.
+        end_datetime: if is set, this is the max date possible.
+    """
     return fake.date_object(end_datetime=end_datetime)
 
-def unique_date_object(fake, end_datetime = None):
-    """Get a unique date object between January 1, 1970 and now"""
+def unique_date_object(
+    fake: object,
+    end_datetime: Optional[DateParseType] = None,
+) -> datetime.date:
+    """
+    Generate a unique date object between January 1, 1970 and now.
+
+    Args:
+        fake: The `Faker` instance.
+        end_datetime: if is set, this is the max date possible.
+    """
     return unique(fake, date_object, end_datetime=end_datetime)
 
-def date_of_birth(fake, tzinfo=None, minimum_age=0, maximum_age=115):
+def date_of_birth(
+    fake: object,
+    tzinfo: Optional[datetime.tzinfo] = None,
+    minimum_age: int = 0,
+    maximum_age: int = 115,
+) -> datetime.date:
     """
-    Generate a random date of birth represented as a Date object, constrained
-    by optional miminimum_age and maximum_age parameters.
+    Generate a random date of birth constrained by minimum_age and maximum_age.
 
     Args:
-        - tzinfo: Defaults to None
-        - minimum_age: Defaults to 0
-        - maximum_age: Defaults to 115
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+        minimum_age: the minimum age of the person with this birth date.
+        maximum_age: the maximum age of the person with this birth date.
     """
-    return fake.date_of_birth(tzinfo=tzinfo, minimum_age=minimum_age, maximum_age=maximum_age)
+    return fake.date_of_birth(
+        tzinfo=tzinfo,
+        minimum_age=minimum_age,
+        maximum_age=maximum_age,
+    )
 
-def unique_date_of_birth(fake, tzinfo=None, minimum_age=0, maximum_age=115):
+def unique_date_of_birth(
+    fake: object,
+    tzinfo: Optional[datetime.tzinfo] = None,
+    minimum_age: int = 0,
+    maximum_age: int = 115,
+) -> datetime.date:
     """
-    Generate a unique random date of birth represented as a Date object, constrained
-    by optional miminimum_age and maximum_age parameters.
+    Generate a unique date of birth constrained by minimum_age and maximum_age.
 
     Args:
-        - tzinfo: Defaults to None
-        - minimum_age: Defaults to 0
-        - maximum_age: Defaults to 115
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+        minimum_age: the minimum age of the person with this birth date.
+        maximum_age: the maximum age of the person with this birth date.
     """
-    return unique(fake, date_of_birth, tzinfo=tzinfo, minimum_age=minimum_age, maximum_age=maximum_age)
+    return unique(
+        fake,
+        date_of_birth,
+        tzinfo=tzinfo,
+        minimum_age=minimum_age,
+        maximum_age=maximum_age,
+    )
 
-def date_this_century(fake, before_today=True, after_today=False):
+def date_this_century(
+    fake: object,
+    *,
+    before_today: bool = True,
+    after_today: bool = False,
+) -> datetime.date:
     """
-    Gets a Date object for the current century.
+    Generate a date in the current century.
 
     Args:
-        - before_today: include days in current century before today
-        - after_today: include days in current century after today
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        before_today: include days in current century before today.
+        after_today: include days in current century after today.
     """
     return fake.date_this_century(before_today=before_today, after_today=after_today)
 
-def unique_date_this_century(fake, before_today=True, after_today=False):
+def unique_date_this_century(
+    fake: object,
+    *,
+    before_today: bool = True,
+    after_today: bool = False,
+) -> datetime.date:
     """
-    Gets a unique Date object for the current century.
+    Generate a unique date in the current century.
 
     Args:
-        - before_today: include days in current century before today
-        - after_today: include days in current century after today
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        before_today: include days in current century before today.
+        after_today: include days in current century after today.
     """
-    return unique(fake, date_this_century, before_today=before_today, after_today=after_today)
+    return unique(
+        fake,
+        date_this_century,
+        before_today=before_today,
+        after_today=after_today,
+    )
 
-def date_this_decade(fake, before_today=True, after_today=False):
+def date_this_decade(
+    fake: object,
+    *,
+    before_today: bool = True,
+    after_today: bool = False,
+) -> datetime.date:
     """
-    Gets a Date object for the decade year.
+    Generate a date in the current decade.
 
     Args:
-        - before_today: include days in current decade before today
-        - after_today: include days in current decade after today
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        before_today: include days in current decade before today.
+        after_today: include days in current decade after today.
     """
     return fake.date_this_decade(before_today=before_today, after_today=after_today)
 
-def unique_date_this_decade(fake, before_today=True, after_today=False):
+def unique_date_this_decade(
+    fake: object,
+    *,
+    before_today: bool = True,
+    after_today: bool = False,
+) -> datetime.date:
     """
-    Gets a unique Date object for the decade year.
+    Generate a unique date in the current decade.
 
     Args:
-        - before_today: include days in current decade before today
-        - after_today: include days in current decade after today
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        before_today: include days in current decade before today.
+        after_today: include days in current decade after today.
     """
-    return unique(fake, date_this_decade, before_today=before_today, after_today=after_today)
+    return unique(
+        fake,
+        date_this_decade,
+        before_today=before_today,
+        after_today=after_today,
+    )
 
-def date_this_month(fake, before_today=True, after_today=False):
+def date_this_month(
+    fake: object,
+    *,
+    before_today: bool = True,
+    after_today: bool = False,
+) -> datetime.date:
     """
-    Gets a Date object for the current month.
+    Generate a date in the current month.
 
     Args:
-        - before_today: include days in current month before today
-        - after_today: include days in current month after today
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        before_today: include days in current month before today.
+        after_today: include days in current month after today.
     """
     return fake.date_this_month(before_today=before_today, after_today=after_today)
 
-def unique_date_this_month(fake, before_today=True, after_today=False):
+def unique_date_this_month(
+    fake: object,
+    *,
+    before_today: bool = True,
+    after_today: bool = False,
+) -> datetime.date:
     """
-    Gets a Date object for the current month.
+    Generate a unique date in the current month.
 
     Args:
-        - before_today: include days in current month before today
-        - after_today: include days in current month after today
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        before_today: include days in current month before today.
+        after_today: include days in current month after today.
     """
-    return unique(fake, date_this_month, before_today=before_today, after_today=after_today)
+    return unique(
+        fake,
+        date_this_month,
+        before_today=before_today,
+        after_today=after_today,
+    )
 
-def date_this_year(fake, before_today=True, after_today=False):
+def date_this_year(
+    fake: object,
+    *,
+    before_today: bool = True,
+    after_today: bool = False,
+) -> datetime.date:
     """
-    Gets a Date object for the current year.
+    Generate a unique date in the current year.
 
     Args:
-        - before_today: include days in current year before today
-        - after_today: include days in current year after today
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        before_today: include days in current year before today.
+        after_today: include days in current year after today.
     """
     return fake.date_this_year(before_today=before_today, after_today=after_today)
 
-def unique_date_this_year(fake, before_today=True, after_today=False):
+def unique_date_this_year(
+    fake: object,
+    *,
+    before_today: bool = True,
+    after_today: bool = False,
+) -> datetime.date:
     """
-    Gets a Date object for the current year.
+    Generate a unique date in the current year.
 
     Args:
-        - before_today: include days in current year before today
-        - after_today: include days in current year after today
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        before_today: include days in current year before today.
+        after_today: include days in current year after today.
     """
-    return unique(fake, date_this_year, before_today=before_today, after_today=after_today)
+    return unique(
+        fake,
+        date_this_year,
+        before_today=before_today,
+        after_today=after_today,
+    )
 
-def date_time(fake, tzinfo=None, end_datetime=None):
+def date_time(
+    fake: object,
+    tzinfo: Optional[datetime.tzinfo] = None,
+    end_datetime: Optional[DateParseType] = None,
+) -> datetime.datetime:
     """
-    Get a datetime object for a date between January 1, 1970 and now
+    Generate a datetime object for a date between January 1, 1970 and now.
 
     Args:
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+        end_datetime: if is set, this is the max date possible.
     """
     return fake.date_time(tzinfo=tzinfo, end_datetime=end_datetime)
 
-def unique_date_time(fake, tzinfo=None, end_datetime=None):
+def unique_date_time(
+    fake: object,
+    tzinfo: Optional[datetime.tzinfo] = None,
+    end_datetime: Optional[DateParseType] = None,
+) -> datetime.datetime:
     """
-    Get a datetime object for a date between January 1, 1970 and now
+    Generate a unique datetime object for a date between January 1, 1970 and now.
 
     Args:
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+        end_datetime: if is set, this is the max date possible.
     """
     return unique(fake, date_time, tzinfo=tzinfo, end_datetime=end_datetime)
 
-def date_time_ad(fake, tzinfo=None, end_datetime=None, start_datetime=None):
+def date_time_ad(
+    fake: object,
+    tzinfo: Optional[datetime.tzinfo] = None,
+    end_datetime: Optional[DateParseType] = None,
+    start_datetime: Optional[DateParseType] = None,
+) -> datetime.datetime:
     """
-    Get a datetime object for a date between January 1, 001 and now
+    Generate a datetime object for a date between January 1, 001 and now.
 
     Args:
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+        start_datetime: the start of the possible date range.
+        end_datetime: the end of the possible date range.
     """
-    return fake.date_time_ad(tzinfo=tzinfo, end_datetime=end_datetime, start_datetime=start_datetime)
+    return fake.date_time_ad(
+        tzinfo=tzinfo,
+        end_datetime=end_datetime,
+        start_datetime=start_datetime,
+    )
 
-def unique_date_time_ad(fake, tzinfo=None, end_datetime=None, start_datetime=None):
+def unique_date_time_ad(
+    fake: object,
+    tzinfo: Optional[datetime.tzinfo] = None,
+    end_datetime: Optional[DateParseType] = None,
+    start_datetime: Optional[DateParseType] = None,
+) -> datetime.datetime:
     """
-    Get a datetime object for a date between January 1, 001 and now
+    Generate a unique datetime object for a date between January 1, 001 and now.
 
     Args:
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+        start_datetime: the start of the possible date range.
+        end_datetime: the end of the possible date range.
     """
-    return unique(fake, date_time_ad, tzinfo=tzinfo, end_datetime=end_datetime, start_datetime=start_datetime)
+    return unique(
+        fake,
+        date_time_ad,
+        tzinfo=tzinfo,
+        end_datetime=end_datetime,
+        start_datetime=start_datetime,
+    )
 
-def date_time_between(fake, start_date='-30y', end_date='now', tzinfo=None):
-    """
-    Get a datetime object based on a random date between two
-    given dates. Accepts date strings that can be recognized by strtotime().
-
-    Args:
-        - start_date: Defaults to 30 years ago
-        - end_date: Defaults to “now”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
-    """
-    return fake.date_time_between(start_date=start_date, end_date=end_date, tzinfo=tzinfo)
-
-def unique_date_time_between(fake, start_date='-30y', end_date='now', tzinfo=None):
-    """
-    Get a unique datetime object based on a random date between two
-    given dates. Accepts date strings that can be recognized by strtotime().
-
-    Args:
-        - start_date: Defaults to 30 years ago
-        - end_date: Defaults to “now”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
-    """
-    return unique(fake, date_time_between, start_date=start_date, end_date=end_date, tzinfo=tzinfo)
-
-def date_time_between_dates(
-    fake,
-    datetime_start: DateTimeOptionalArg = None,
-    datetime_end: DateTimeOptionalArg = None,
+def date_time_between(
+    fake: object,
+    start_date: DateParseType = '-30y',
+    end_date: DateParseType = 'now',
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Takes two datetime objects and returns a random datetime
-    between the two given datetimes. Accepts datetime objects.
+    Generate a datetime object between two given dates.
+
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - datetime_start: datetime
-        - datetime_end: datetime
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
+        fake: The `Faker` instance.
+        start_date: the start of the possible date range.
+        end_date: the end of the possible date range.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+    """
+    return fake.date_time_between(
+        start_date=start_date,
+        end_date=end_date,
+        tzinfo=tzinfo,
+    )
 
-    Returns:
-        A datetime
+def unique_date_time_between(
+    fake: object,
+    start_date: DateParseType = '-30y',
+    end_date: DateParseType = 'now',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.datetime:
+    """
+    Generate a unique datetime object between two given dates.
+
+    Accepts date strings that can be recognized by strtotime().
+
+    Args:
+        fake: The `Faker` instance.
+        start_date: the start of the possible date range.
+        end_date: the end of the possible date range.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+    """
+    return unique(
+        fake,
+        date_time_between,
+        start_date=start_date,
+        end_date=end_date,
+        tzinfo=tzinfo,
+    )
+
+def date_time_between_dates(
+    fake: object,
+    datetime_start: Optional[DateParseType] = None,
+    datetime_end: Optional[DateParseType] = None,
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.datetime:
+    """
+    Generate a datetime between two dates.
+
+    Accepts datetime objects.
+
+    Args:
+        fake: The `Faker` instance.
+        datetime_start: the start of the possible datetime range.
+        datetime_end: the end of the possible datetime range.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
     return fake.date_time_between_dates(
         datetime_start=datetime_start,
@@ -342,22 +475,21 @@ def date_time_between_dates(
     )
 
 def unique_date_time_between_dates(
-    fake,
-    datetime_start: DateTimeOptionalArg = None,
-    datetime_end: DateTimeOptionalArg = None,
+    fake: object,
+    datetime_start: Optional[DateParseType] = None,
+    datetime_end: Optional[DateParseType] = None,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Takes two datetime objects and returns a unique random datetime
-    between the two given datetimes. Accepts datetime objects.
+    Generate a unique datetime between two dates.
+
+    Accepts datetime objects.
 
     Args:
-        - datetime_start: datetime
-        - datetime_end: datetime
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        datetime_start: the start of the possible datetime range.
+        datetime_end: the end of the possible datetime range.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
     return unique(
         fake,
@@ -368,367 +500,457 @@ def unique_date_time_between_dates(
     )
 
 def date_time_this_century(
-    fake,
+    fake: object,
+    *,
     before_now: bool = True,
     after_now: bool = False,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Gets a datetime object for the current century.
+    Generate a datetime object for the current century.
 
     Args:
-        - before_now: include days in current century before today
-        - after_now: include days in current century after today
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        before_now: include days in current century before today.
+        after_now: include days in current century after today.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
-    return fake.date_time_this_century(before_now=before_now, after_now=after_now, tzinfo=tzinfo)
+    return fake.date_time_this_century(
+        before_now=before_now,
+        after_now=after_now,
+        tzinfo=tzinfo,
+    )
 
 def unique_date_time_this_century(
-    fake,
+    fake: object,
+    *,
     before_now: bool = True,
     after_now: bool = False,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Gets a unique datetime object for the current century.
+    Generate a unique datetime object for the current century.
 
     Args:
-        - before_now: include days in current century before today
-        - after_now: include days in current century after today
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        before_now: include days in current century before today.
+        after_now: include days in current century after today.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
-    return unique(fake, date_time_this_century, before_now=before_now, after_now=after_now, tzinfo=tzinfo)
+    return unique(
+        fake,
+        date_time_this_century,
+        before_now=before_now,
+        after_now=after_now,
+        tzinfo=tzinfo,
+    )
 
 def date_time_this_decade(
-    fake,
+    fake: object,
+    *,
     before_now: bool = True,
     after_now: bool = False,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Gets a datetime object for the decade year.
+    Generate a datetime object for the current decade.
 
     Args:
-        - before_now: include days in current decade before today
-        - after_now: include days in current decade after today
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        before_now: include days in current decade before today.
+        after_now: include days in current decade after today.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
-    return fake.date_time_this_decade(before_now=before_now, after_now=after_now, tzinfo=tzinfo)
+    return fake.date_time_this_decade(
+        before_now=before_now,
+        after_now=after_now,
+        tzinfo=tzinfo,
+    )
 
 def unique_date_time_this_decade(
-    fake,
+    fake: object,
+    *,
     before_now: bool = True,
     after_now: bool = False,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Gets a unique datetime object for the decade year.
+    Generate a unique datetime object for the current decade.
 
     Args:
-        - before_now: include days in current decade before today
-        - after_now: include days in current decade after today
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        before_now: include days in current decade before today.
+        after_now: include days in current decade after today.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
-    return unique(fake, date_time_this_decade, before_now=before_now, after_now=after_now, tzinfo=tzinfo)
+    return unique(
+        fake,
+        date_time_this_decade,
+        before_now=before_now,
+        after_now=after_now,
+        tzinfo=tzinfo,
+    )
 
 def date_time_this_month(
-    fake,
+    fake: object,
+    *,
     before_now: bool = True,
     after_now: bool = False,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Gets a datetime object for the current month.
+    Generate a datetime object for the current month.
 
     Args:
-        - before_now: include days in current month before today
-        - after_now: include days in current month after today
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        before_now: include days in current month before today.
+        after_now: include days in current month after today.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
-    return fake.date_time_this_month(before_now=before_now, after_now=after_now, tzinfo=tzinfo)
+    return fake.date_time_this_month(
+        before_now=before_now,
+        after_now=after_now,
+        tzinfo=tzinfo,
+    )
 
 def unique_date_time_this_month(
-    fake,
+    fake: object,
+    *,
     before_now: bool = True,
     after_now: bool = False,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Gets a datetime object for the current month.
+    Generate a unique datetime object for the current month.
 
     Args:
-        - before_now: include days in current month before today
-        - after_now: include days in current month after today
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        before_now: include days in current month before today.
+        after_now: include days in current month after today.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
-    return unique(fake, date_time_this_month, before_now=before_now, after_now=after_now, tzinfo=tzinfo)
+    return unique(
+        fake,
+        date_time_this_month,
+        before_now=before_now,
+        after_now=after_now,
+        tzinfo=tzinfo,
+    )
 
 def date_time_this_year(
-    fake,
+    fake: object,
+    *,
     before_now: bool = True,
     after_now: bool = False,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Gets a datetime object for the current year.
+    Generate a datetime object for the current year.
 
     Args:
-        - before_now: include days in current year before today
-        - after_now: include days in current year after today
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        before_now: include days in current year before today.
+        after_now: include days in current year after today.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
-    return fake.date_time_this_year(before_now=before_now, after_now=after_now, tzinfo=tzinfo)
+    return fake.date_time_this_year(
+        before_now=before_now,
+        after_now=after_now,
+        tzinfo=tzinfo,
+    )
 
 def unique_date_time_this_year(
-    fake,
+    fake: object,
+    *,
     before_now: bool = True,
     after_now: bool = False,
     tzinfo: Optional[datetime.tzinfo] = None,
 ) -> datetime.datetime:
     """
-    Gets a datetime object for the current year.
+    Generate a unique datetime object for the current year.
 
     Args:
-        - before_now: include days in current year before today
-        - after_now: include days in current year after today
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
+        fake: The `Faker` instance.
+        before_now: include days in current year before today.
+        after_now: include days in current year after today.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+    """
+    return unique(
+        fake,
+        date_time_this_year,
+        before_now=before_now,
+        after_now=after_now,
+        tzinfo=tzinfo,
+    )
 
-    Returns:
-        A datetime
+def future_date(
+    fake: object,
+    end_date: DateParseType = '+30d',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.date:
     """
-    return unique(fake, date_time_this_year, before_now=before_now, after_now=after_now, tzinfo=tzinfo)
+    Generate a random date object between 1 day from now and a given date.
 
-def day_of_month(fake):
-    """
-    Generate a day of month.
-    """
-    return fake.day_of_month()
-
-def unique_day_of_month(fake):
-    """
-    Generate a day of month.
-    """
-    return unique(fake, day_of_month)
-
-def day_of_week(fake):
-    """
-    Generate a day of week.
-    """
-    return fake.day_of_week()
-
-def unique_day_of_week(fake):
-    """
-    Generate a day of week.
-    """
-    return unique(fake, day_of_week)
-
-def future_date(fake, end_date: DateTimeArg = '+30d', tzinfo: Optional[datetime.tzinfo] = None) -> datetime.date:
-    """
-    Get a Date object based on a random date between 1 day from now
-    and a given date. Accepts date strings that can be
-    recognized by strtotime().
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - end_date: Defaults to “+30d”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        end_date: The max future date.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
     return fake.future_date(end_date=end_date, tzinfo=tzinfo)
 
-def unique_future_date(fake, end_date: DateTimeArg = '+30d', tzinfo: Optional[datetime.tzinfo] = None) -> datetime.date:
+def unique_future_date(
+    fake: object,
+    end_date: DateParseType = '+30d',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.date:
     """
-    Get a Date object based on a random date between 1 day from now
-    and a given date. Accepts date strings that can be
-    recognized by strtotime().
+    Generate a unique random date object between 1 day from now and a given date.
+
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - end_date: Defaults to “+30d”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A date
+        fake: The `Faker` instance.
+        end_date: The max future date.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
     return unique(fake, future_date, end_date=end_date, tzinfo=tzinfo)
 
-def future_datetime(fake, end_date: DateTimeArg = '+30d', tzinfo: Optional[datetime.tzinfo] = None) -> datetime.datetime:
+def future_datetime(
+    fake: object,
+    end_date: DateParseType = '+30d',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.datetime:
     """
-    Get a datetime object based on a random date between 1 second form now
-    and a given date. Accepts date strings that can be recognized
-    by strtotime().
+    Generate a random datetime object between 1 second from now and a given date.
+
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - end_date: Defaults to “+30d”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        end_date: The max future date.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
     return fake.future_datetime(end_date=end_date, tzinfo=tzinfo)
 
-def unique_future_datetime(fake, end_date: DateTimeArg = '+30d', tzinfo: Optional[datetime.tzinfo] = None) -> datetime.datetime:
+def unique_future_datetime(
+    fake: object,
+    end_date: DateParseType = '+30d',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.datetime:
     """
-    Get a datetime object based on a random date between 1 second form now
-    and a given date. Accepts date strings that can be recognized
-    by strtotime().
+    Generate a unique datetime object between 1 second from now and a given date.
+
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - end_date: Defaults to “+30d”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-
-    Returns:
-        A datetime
+        fake: The `Faker` instance.
+        end_date: The max future date.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
     return unique(fake, future_datetime, end_date=end_date, tzinfo=tzinfo)
 
 def iso8601(
-    fake,
+    fake: object,
     tzinfo: Optional[datetime.tzinfo] = None,
-    end_datetime: DateTimeOptionalArg = None,
+    end_datetime: Optional[DateParseType] = None,
     sep: str = 'T',
     timespec: str = 'auto',
 ) -> str:
     """
-    Get a timestamp in ISO 8601 format (or one of its profiles).
+    Generate a timestamp in ISO 8601 format (or one of its profiles).
 
     Args:
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-        - sep: separator between date and time, defaults to ‘T’
-        - timespec: format specifier for the time part,
-          defaults to ‘auto’ - see datetime.isoformat() documentation
+        fake: The `Faker` instance.
+        end_datetime: The max future datetime.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+        sep: separator between date and time, defaults to 'T'.
+        timespec: format specifier for the time part,
+          defaults to 'auto' - see datetime.isoformat() documentation.
 
     Returns:
         A string with date into ISO 8601 format.
     """
-    return fake.iso8601(tzinfo=tzinfo, end_datetime=end_datetime, sep=sep, timespec=timespec)
+    return fake.iso8601(
+        tzinfo=tzinfo,
+        end_datetime=end_datetime,
+        sep=sep,
+        timespec=timespec,
+    )
 
 def unique_iso8601(
-    fake,
+    fake: object,
     tzinfo: Optional[datetime.tzinfo] = None,
-    end_datetime: DateTimeOptionalArg = None,
+    end_datetime: Optional[DateParseType] = None,
     sep: str = 'T',
     timespec: str = 'auto',
 ) -> str:
     """
-    Get a timestamp in ISO 8601 format (or one of its profiles).
+    Generate a unique timestamp in ISO 8601 format (or one of its profiles).
 
     Args:
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
-        - sep: separator between date and time, defaults to ‘T’
-        - timespec: format specifier for the time part,
-          defaults to ‘auto’ - see datetime.isoformat() documentation
+        fake: The `Faker` instance.
+        end_datetime: The max future datetime.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
+        sep: separator between date and time, defaults to 'T'.
+        timespec: format specifier for the time part,
+          defaults to 'auto' - see datetime.isoformat() documentation.
 
     Returns:
         A string with date into ISO 8601 format.
     """
-    return unique(fake, iso8601, tzinfo=tzinfo, end_datetime=end_datetime, sep=sep, timespec=timespec)
+    return unique(
+        fake,
+        iso8601,
+        tzinfo=tzinfo,
+        end_datetime=end_datetime,
+        sep=sep,
+        timespec=timespec,
+    )
 
-def month(fake):
-    return fake.month()
-
-def unique_month(fake):
-    return unique(fake, month)
-
-def month_name(fake):
-    return fake.month_name()
-
-def unique_month_name(fake):
-    return unique(fake, month_name)
-
-def past_date(fake, start_date: DateTimeArg = '-30d', tzinfo: Optional[datetime.tzinfo] = None) -> datetime.date:
+def past_date(
+    fake: object,
+    start_date: DateParseType = '-30d',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.date:
     """
-    Get a Date object based on a random date between a given
-    date and 1 day ago. Accepts date strings that
-    can be recognized by strtotime().
+    Generate a random date between a given date and 1 day ago.
+
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - start_date: Defaults to “-30d”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
+        fake: The `Faker` instance.
+        start_date: The minimum old date.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
     return fake.past_date(start_date=start_date, tzinfo=tzinfo)
 
-def unique_past_date(fake, start_date: DateTimeArg = '-30d', tzinfo: Optional[datetime.tzinfo] = None) -> datetime.date:
+def unique_past_date(
+    fake: object,
+    start_date: DateParseType = '-30d',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.date:
     """
-    Get a Date object based on a random date between a given
-    date and 1 day ago. Accepts date strings that
-    can be recognized by strtotime().
+    Generate a unique date between a given date and 1 day ago.
+
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - start_date: Defaults to “-30d”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
+        fake: The `Faker` instance.
+        start_date: The minimum old date.
+        tzinfo: timezone, instance of datetime.tzinfo subclass.
     """
     return unique(fake, past_date, start_date=start_date, tzinfo=tzinfo)
 
-def past_datetime(fake, start_date: DateTimeArg = '-30d', tzinfo: Optional[datetime.tzinfo] = None) -> datetime.datetime:
+def past_datetime(
+    fake: object,
+    start_date: DateParseType = '-30d',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.datetime:
     """
-    Get a datetime object based on a random date between a given
-    date and 1 second ago. Accepts date strings
-    that can be recognized by strtotime().
+    Generate a random datetime between a given date and 1 second ago.
+
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - start_date: Defaults to “-30d”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
+        fake: The `Faker` instance.
+        start_date: The minimum old date.
+        tzinfo: timezone, instance of datetime.tzinfo subclass
     """
     return fake.past_datetime(start_date=start_date, tzinfo=tzinfo)
 
-def unique_past_datetime(fake, start_date: DateTimeArg = '-30d', tzinfo: Optional[datetime.tzinfo] = None) -> datetime.datetime:
+def unique_past_datetime(
+    fake: object,
+    start_date: DateParseType = '-30d',
+    tzinfo: Optional[datetime.tzinfo] = None,
+) -> datetime.datetime:
     """
-    Get a datetime object based on a random date between a given
-    date and 1 second ago. Accepts date strings
-    that can be recognized by strtotime().
+    Generate a unique datetime between a given date and 1 second ago.
+
+    Accepts date strings that can be recognized by strtotime().
 
     Args:
-        - start_date: Defaults to “-30d”
-        - tzinfo: timezone, instance of datetime.tzinfo subclass
+        fake: The `Faker` instance.
+        start_date: The minimum old date.
+        tzinfo: timezone, instance of datetime.tzinfo subclass
     """
     return unique(fake, past_datetime, start_date=start_date, tzinfo=tzinfo)
 
-def time(fake, pattern: str = '%H:%M:%S', end_datetime: DateTimeOptionalArg = None) -> str:
-    """Get a time string (24h format by default)"""
+def time(
+    fake: object,
+    pattern: str = '%H:%M:%S',
+    end_datetime: Optional[DateParseType] = None,
+) -> str:
+    """Generate a time string (24h format by default)."""
     return fake.time(pattern=pattern, end_datetime=end_datetime)
 
-def unique_time(fake, pattern: str = '%H:%M:%S', end_datetime: DateTimeOptionalArg = None) -> str:
-    """Get a time string (24h format by default)"""
+def unique_time(
+    fake: object,
+    pattern: str = '%H:%M:%S',
+    end_datetime: Optional[DateParseType] = None,
+) -> str:
+    """Generate a time string (24h format by default)."""
     return unique(fake, time, pattern=pattern, end_datetime=end_datetime)
 
-def time_object(fake, end_datetime: DateTimeOptionalArg = None) -> datetime.time:
-    """Get a time object"""
+def time_object(
+    fake: object,
+    end_datetime: Optional[DateParseType] = None,
+) -> datetime.time:
+    """Generate a time object."""
     return fake.time_object(end_datetime=end_datetime)
 
-def unique_time_object(fake, end_datetime: DateTimeOptionalArg = None) -> datetime.time:
-    """Get a time object"""
+def unique_time_object(
+    fake: object,
+    end_datetime: Optional[DateParseType] = None,
+) -> datetime.time:
+    """Generate a unique time object."""
     return unique(fake, time_object, end_datetime=end_datetime)
 
-def timezone(fake) -> str:
+def day_of_month(fake: object) -> str:
+    """Generate a day of month."""
+    return fake.day_of_month()
+
+def unique_day_of_month(fake: object) -> str:
+    """Generate a unique day of month."""
+    return unique(fake, day_of_month)
+
+def day_of_week(fake: object) -> str:
+    """Generate a day of week."""
+    return fake.day_of_week()
+
+def unique_day_of_week(fake: object) -> str:
+    """Generate a unique day of week."""
+    return unique(fake, day_of_week)
+
+def timezone(fake: object) -> str:
+    """Generate a timezone."""
     return fake.timezone()
 
-def unique_timezone(fake) -> str:
+def unique_timezone(fake: object) -> str:
+    """Generate a unique timezone."""
     return unique(fake, timezone)
 
-def year(fake) -> str:
+def month(fake: object) -> str:
+    """Generate a month."""
+    return fake.month()
+
+def unique_month(fake: object) -> str:
+    """Generate a unique month."""
+    return unique(fake, month)
+
+def month_name(fake: object) -> str:
+    """Generate a month name."""
+    return fake.month_name()
+
+def unique_month_name(fake: object) -> str:
+    """Generate a unique month name."""
+    return unique(fake, month_name)
+
+def year(fake: object) -> str:
+    """Generate a year."""
     return fake.year()
 
-def unique_year(fake) -> str:
+def unique_year(fake: object) -> str:
+    """Generate a unique year."""
     return unique(fake, year)
