@@ -1,29 +1,41 @@
-from django.test import TestCase
-
 from rest_framework_supertest.shortcuts import geographicals
 
-from .base import FakerMockMixin
+from . import ShortcutTestCase
 
 
-class GeographicalsShortcutsTests(FakerMockMixin, TestCase):
-    def test_coordinate(self):
+class GeographicalsShortcutsTests(ShortcutTestCase):
+    def test_coordinate(self) -> None:
         center = 50
         radius = 20
-        self.exec_test(['coordinate'], geographicals, 'coordinate', center=center, radius=radius)
+        self.exec_test(
+            ['coordinate'],
+            geographicals,
+            'coordinate',
+            center=center,
+            radius=radius,
+        )
 
-    def test_unique_coordinate(self):
+    def test_unique_coordinate(self) -> None:
         center = 50
         radius = 20
-        self.exec_test(['unique', 'coordinate'], geographicals, 'unique_coordinate', center=center, radius=radius)
+        self.exec_test(
+            ['unique', 'coordinate'],
+            geographicals,
+            'unique_coordinate',
+            center=center,
+            radius=radius,
+        )
 
-    def test_latitude(self):
+    def test_latitude(self) -> None:
         self.exec_test(['latitude'], geographicals, 'latitude')
 
-    def test_unique_latitude(self):
+    def test_unique_latitude(self) -> None:
         self.exec_test(['unique', 'latitude'], geographicals, 'unique_latitude')
 
-    def test_longitude(self):
+    def test_longitude(self) -> None:
         self.exec_test(['longitude'], geographicals, 'longitude')
 
-    def test_unique_longitude(self):
+    def test_unique_longitude(self) -> None:
         self.exec_test(['unique', 'longitude'], geographicals, 'unique_longitude')
+
+__all__ = []

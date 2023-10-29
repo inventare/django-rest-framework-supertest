@@ -1,12 +1,10 @@
-from django.test import TestCase
-
 from rest_framework_supertest.shortcuts import lorem
 
-from .base import FakerMockMixin
+from . import ShortcutTestCase
 
 
-class LoremShortcutsTests(FakerMockMixin, TestCase):
-    def test_paragraph(self):
+class LoremShortcutsTests(ShortcutTestCase):
+    def test_paragraph(self) -> None:
         nb_sentences = 10
         variable_nb_sentences = True
         ext_word_list = None
@@ -19,7 +17,7 @@ class LoremShortcutsTests(FakerMockMixin, TestCase):
             ext_word_list=ext_word_list,
         )
 
-    def test_unique_paragraph(self):
+    def test_unique_paragraph(self) -> None:
         nb_sentences = 10
         variable_nb_sentences = True
         ext_word_list = None
@@ -32,7 +30,7 @@ class LoremShortcutsTests(FakerMockMixin, TestCase):
             ext_word_list=ext_word_list,
         )
 
-    def test_sentence(self):
+    def test_sentence(self) -> None:
         nb_words = 20
         variable_nb_words = False
         ext_word_list = None
@@ -45,7 +43,7 @@ class LoremShortcutsTests(FakerMockMixin, TestCase):
             ext_word_list=ext_word_list,
         )
 
-    def test_unique_sentence(self):
+    def test_unique_sentence(self) -> None:
         nb_words = 20
         variable_nb_words = False
         ext_word_list = None
@@ -58,22 +56,48 @@ class LoremShortcutsTests(FakerMockMixin, TestCase):
             ext_word_list=ext_word_list,
         )
 
-    def test_text(self):
+    def test_text(self) -> None:
         max_nb_chars = 400
         ext_word_list = None
-        self.exec_test(['text'], lorem, 'text', max_nb_chars=max_nb_chars, ext_word_list=ext_word_list)
+        self.exec_test(
+            ['text'],
+            lorem,
+            'text',
+            max_nb_chars=max_nb_chars,
+            ext_word_list=ext_word_list,
+        )
 
-    def test_unique_text(self):
+    def test_unique_text(self) -> None:
         max_nb_chars = 400
         ext_word_list = None
-        self.exec_test(['unique', 'text'], lorem, 'unique_text', max_nb_chars=max_nb_chars, ext_word_list=ext_word_list)
+        self.exec_test(
+            ['unique', 'text'],
+            lorem,
+            'unique_text',
+            max_nb_chars=max_nb_chars,
+            ext_word_list=ext_word_list,
+        )
 
-    def test_word(self):
+    def test_word(self) -> None:
         part_of_speech = 'subject'
         ext_word_list = []
-        self.exec_test(['word'], lorem, 'word', part_of_speech=part_of_speech, ext_word_list=ext_word_list)
+        self.exec_test(
+            ['word'],
+            lorem,
+            'word',
+            part_of_speech=part_of_speech,
+            ext_word_list=ext_word_list,
+        )
 
-    def test_unique_word(self):
+    def test_unique_word(self) -> None:
         part_of_speech = 'subject'
         ext_word_list = []
-        self.exec_test(['unique', 'word'], lorem, 'unique_word', part_of_speech=part_of_speech, ext_word_list=ext_word_list)
+        self.exec_test(
+            ['unique', 'word'],
+            lorem,
+            'unique_word',
+            part_of_speech=part_of_speech,
+            ext_word_list=ext_word_list,
+        )
+
+__all__ = []
