@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 from unittest.mock import MagicMock
 
 from django.test import TestCase
@@ -9,7 +9,7 @@ class ShortcutTestCase(TestCase):
 
     def get_faker_mock(
         self,
-        paths: Optional[list[str]] = None,
+        paths: Optional[List[str]] = None,
     ) -> (MagicMock, MagicMock):
         """
         Create a mock for `faker.Faker()` instance.
@@ -37,7 +37,7 @@ class ShortcutTestCase(TestCase):
 
     def exec_test(
         self,
-        paths: list[str],
+        paths: List[str],
         module: object,
         function_name: str,
         **kwargs: dict,

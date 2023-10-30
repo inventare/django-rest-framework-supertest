@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Type
 
 from django.db import models
 
@@ -6,7 +6,7 @@ from rest_framework_supertest.utils.faker import fake
 
 
 def create_faker(
-    model_class: type[models.Model],
+    model_class: Type[models.Model],
     data: Optional[dict] = None,
     *,
     save: bool = True,

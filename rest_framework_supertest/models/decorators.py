@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Type
 
 from django.db import models
 
@@ -12,7 +12,7 @@ def faker_fields(**kwargs: dict) -> Callable:
     Register `faker_fields` and `faker_args` inside the model to store the
     faker model constructor properties.
     """
-    def wrapper(model_class: type[models.Model]) -> type[models.Model]:
+    def wrapper(model_class: Type[models.Model]) -> Type[models.Model]:
         return setup_faker_fields(model_class, **kwargs)
 
     return wrapper

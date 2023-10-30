@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 from ._utils import unique
 
@@ -234,7 +234,7 @@ def uri_path(fake: object, deep: Optional[int] = None) -> str:
     """Generate a URI path."""
     return fake.uri_path(deep=deep)
 
-def url(fake: object, schemes: Optional[list[str]] = None) -> str:
+def url(fake: object, schemes: Optional[List[str]] = None) -> str:
     """
     Generate a url.
 

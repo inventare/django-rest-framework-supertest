@@ -1,17 +1,18 @@
+from typing import Type
+
 from django.db import models
 
 
 def setup_faker_fields(
-    model_class: type[models.Model],
+    model_class: Type[models.Model],
     **kwargs: dict,
-) -> type[models.Model]:
+) -> Type[models.Model]:
     """
     Setup faker fields for an model class.
 
     Register `faker_fields` and `faker_args` inside the model to store the
     faker model constructor properties.
     """
-    return model_class
     if not issubclass(model_class, models.Model):
         msg = "Wrapped class must subclass Model."
         raise TypeError(msg)

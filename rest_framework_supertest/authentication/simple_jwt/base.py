@@ -1,4 +1,4 @@
-from typing import ClassVar, Optional
+from typing import ClassVar, List, Optional
 
 from django.contrib.auth.models import AbstractUser
 from rest_framework.exceptions import APIException
@@ -24,10 +24,10 @@ class SimpleJWTAuthentication(AuthenticationBase):
     Determinates `authenticate` function for the SimpleJWT and exceptions
     for authentication failed and unauthentication.
     """
-    authentication_failed_exceptions: ClassVar[list[APIException]] = [
+    authentication_failed_exceptions: ClassVar[List[APIException]] = [
         NO_ACTIVE_ACCOUNT,
     ]
-    unauthentication_exceptions: ClassVar[list[APIException]] = [
+    unauthentication_exceptions: ClassVar[List[APIException]] = [
         TWO_AUTORIZATION_PARTS,
         TOKEN_NOT_VALID_FOR_ANY_TOKEN_TYPE,
         TOKEN_NO_RECOGNIZABLE_USER_ID,
