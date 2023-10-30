@@ -5,13 +5,29 @@ from . import ShortcutTestCase
 
 class CreditCardsShortcutsTests(ShortcutTestCase):
     def test_credit_card_expire(self) -> None:
-        self.exec_test(['credit_card_expire'], credit_cards, 'credit_card_expire')
+        start = 'now'
+        end = '+20y'
+        date_format = '%m'
+        self.exec_test(
+            ['credit_card_expire'],
+            credit_cards,
+            'credit_card_expire',
+            start=start,
+            end=end,
+            date_format=date_format,
+        )
 
     def test_unique_credit_card_expire(self) -> None:
+        start = 'now'
+        end = '+20y'
+        date_format = '%m'
         self.exec_test(
             ['unique', 'credit_card_expire'],
             credit_cards,
             'unique_credit_card_expire',
+            start=start,
+            end=end,
+            date_format=date_format,
         )
 
     def test_credit_card_number(self) -> None:
