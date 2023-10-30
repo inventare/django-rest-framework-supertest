@@ -1,34 +1,61 @@
-from ._utils import unique
+from typing import Optional
 
-def credit_card_expire(fake, start='now', end='+10y', date_format='%m/%y'):
+from ._utils import unique
+from .typing import DateParseType
+
+
+def credit_card_expire(
+    fake: object,
+    start: DateParseType = 'now',
+    end: DateParseType = '+10y',
+    date_format: str = '%m/%y',
+) -> str:
     """
     Generate a credit card expiry date.
 
-    This method uses date_time_between() under the hood to generate the
-    expiry date, so the start and end arguments work in the same way
-    here as it would in that method. For the actual formatting
-    of the expiry date, strftime() is used and date_format
-    is simply passed to that method.
-    """
-    return fake.credit_card_expire()
+    To format of the expiry date, strftime() is used and
+    date_format is simply passed to that method.
 
-def unique_credit_card_expire(fake):
+    Args:
+        fake: The `Faker` instance.
+        start: the start date to generate the expiry date.
+        end: the end date to generate the expiry date.
+        date_format: the date format of the expiry date.
+    """
+    return fake.credit_card_expire(start=start, end=end, date_format=date_format)
+
+def unique_credit_card_expire(
+    fake: object,
+    start: DateParseType = 'now',
+    end: DateParseType = '+10y',
+    date_format: str = '%m/%y',
+) -> str:
     """
     Generate a unique credit card expiry date.
 
-    This method uses date_time_between() under the hood to generate the
-    expiry date, so the start and end arguments work in the same way
-    here as it would in that method. For the actual formatting
-    of the expiry date, strftime() is used and date_format
-    is simply passed to that method.
-    """
-    return unique(fake, credit_card_expire)
+    To format of the expiry date, strftime() is used and
+    date_format is simply passed to that method.
 
-def credit_card_number(fake, card_type=None):
+    Args:
+        fake: The `Faker` instance.
+        start: the start date to generate the expiry date.
+        end: the end date to generate the expiry date.
+        date_format: the date format of the expiry date.
+    """
+    return unique(
+        fake,
+        credit_card_expire,
+        start=start,
+        end=end,
+        date_format=date_format,
+    )
+
+def credit_card_number(fake: object, card_type: Optional[str] = None) -> str:
     """
     Generate a valid credit card number.
-    
+
     Args:
+        fake: The `Faker` instance.
         card_type: if value is None, a random type is used. The
           list of valid card types includes 'amex', 'diners',
           'discover', 'jcb', 'jcb15', 'jcb16', 'maestro',
@@ -36,11 +63,12 @@ def credit_card_number(fake, card_type=None):
     """
     return fake.credit_card_number(card_type=card_type)
 
-def unique_credit_card_number(fake, card_type=None):
+def unique_credit_card_number(fake: object, card_type: Optional[str] = None) -> str:
     """
     Generate a valid unique credit card number.
-    
+
     Args:
+        fake: The `Faker` instance.
         card_type: if value is None, a random type is used. The
           list of valid card types includes 'amex', 'diners',
           'discover', 'jcb', 'jcb15', 'jcb16', 'maestro',
@@ -48,11 +76,12 @@ def unique_credit_card_number(fake, card_type=None):
     """
     return unique(fake, credit_card_number, card_type=card_type)
 
-def credit_card_provider(fake, card_type=None):
+def credit_card_provider(fake: object, card_type: Optional[str] = None) -> str:
     """
     Generate a credit card provider name.
-    
+
     Args:
+        fake: The `Faker` instance.
         card_type: if value is None, a random type is used. The
           list of valid card types includes 'amex', 'diners',
           'discover', 'jcb', 'jcb15', 'jcb16', 'maestro',
@@ -60,11 +89,12 @@ def credit_card_provider(fake, card_type=None):
     """
     return fake.credit_card_provider(card_type=card_type)
 
-def unique_credit_card_provider(fake, card_type=None):
+def unique_credit_card_provider(fake: object, card_type: Optional[str] = None) -> str:
     """
     Generate a unique credit card provider name.
-    
+
     Args:
+        fake: The `Faker` instance.
         card_type: if value is None, a random type is used. The
           list of valid card types includes 'amex', 'diners',
           'discover', 'jcb', 'jcb15', 'jcb16', 'maestro',
@@ -72,11 +102,12 @@ def unique_credit_card_provider(fake, card_type=None):
     """
     return unique(fake, credit_card_provider, card_type=card_type)
 
-def credit_card_security_code(fake, card_type=None):
+def credit_card_security_code(fake: object, card_type: Optional[str] = None) -> str:
     """
     Generate a credit card security code.
-    
+
     Args:
+        fake: The `Faker` instance.
         card_type: if value is None, a random type is used. The
           list of valid card types includes 'amex', 'diners',
           'discover', 'jcb', 'jcb15', 'jcb16', 'maestro',
@@ -84,11 +115,15 @@ def credit_card_security_code(fake, card_type=None):
     """
     return fake.credit_card_security_code(card_type=card_type)
 
-def unique_credit_card_security_code(fake, card_type=None):
+def unique_credit_card_security_code(
+    fake: object,
+    card_type: Optional[str] = None,
+) -> str:
     """
     Generate a unique credit card security code.
-    
+
     Args:
+        fake: The `Faker` instance.
         card_type: if value is None, a random type is used. The
           list of valid card types includes 'amex', 'diners',
           'discover', 'jcb', 'jcb15', 'jcb16', 'maestro',

@@ -1,30 +1,63 @@
-from typing import List
 import json
+from typing import List
+
 from django.http import HttpResponse
+from rest_framework.exceptions import APIException
+
 from rest_framework_supertest.utils.exceptions import APIExceptionsUtils
 
 
 class AssertAPIExceptionMixin:
-    def assertAPIException(self, response: HttpResponse, exception):
-        if not hasattr(self, 'assertResponseJson'):
-            raise AttributeError(
-                "To use assertAPIException method, assertResponseJson must be present in the TestCase. "
-                "Extends AssertAPIResponseMixin on your TestCase"
+    """Implements a Mixin to assert API exceptions in APITestCase."""
+
+    def assert_api_exception(
+        self,
+        response: HttpResponse,
+        exception: APIException,
+    ) -> None:
+        """
+        Assert if the response is generated from an APIException.
+
+        Args:
+            response: The `HttpResponse` to check if is generated from APIException.
+            exception: The `APIException` to verify.
+        """
+        if not hasattr(self, 'assert_response_json'):
+            msg = (
+                "To use assertAPIException method, assert_response_json must be "
+                "present in the TestCase. Extends AssertAPIResponseMixin on your "
+                "TestCase"
             )
-        if not hasattr(self, 'assertResponseHeaders'):
-            raise AttributeError(
-                "To use assertAPIException method, assertResponseHeaders must be present in the TestCase. "
-                "Extends AssertAPIResponseMixin on your TestCase"
+            raise AttributeError(msg)
+        if not hasattr(self, 'assert_response_headers'):
+            msg = (
+                "To use assertAPIException method, assert_response_headers must be "
+                "present in the TestCase. Extends AssertAPIResponseMixin on your"
+                " TestCase"
             )
+            raise AttributeError(msg)
 
         handler = APIExceptionsUtils(response, exception)
         data, status, headers = handler.exception_handler()
 
-        self.assertEquals(response.status_code, status)
-        self.assertResponseJson(response, data)
-        self.assertResponseHeaders(response, headers)
+        self.assertEqual(response.status_code, status)
+        self.assert_response_json(response, data)
+        self.assert_response_headers(response, headers)
 
-    def assertOneOfAPIExceptions(self, response: HttpResponse, exceptions: List[any]):
+    def assert_one_of_api_exceptions(
+        self,
+        response: HttpResponse,
+        exceptions: List[APIException],
+    ) -> None:
+        """
+        Assert if the response is generated from one of the APIException's.
+
+        Args:
+            response: The `HttpResponse` to check if is generated from one of
+              the APIException's from the `exceptions` argument.
+            exceptions: An list of `APIException` to verify if the response
+              is generated from one of it.
+        """
         found_one = False
         for exception in exceptions:
             handler = APIExceptionsUtils(response, exception)
@@ -36,7 +69,7 @@ class AssertAPIExceptionMixin:
                 continue
 
             found_one = True
-            for header in headers.keys():
+            for header in headers:
                 value = headers.get(header)
 
                 if response.headers.get(header) != value:

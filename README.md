@@ -5,6 +5,7 @@ An **WORK IN PROGRESS** set of utilities to write automated tests for APIS write
 <p align="center">
     <a href='https://github.com/inventare/django-rest-framework-supertest/actions/workflows/tests.yml'><img alt="GitHub Workflow Status (with event)" src="https://img.shields.io/github/actions/workflow/status/inventare/django-rest-framework-supertest/tests.yml?label=tests" /></a>
     <a href='https://coveralls.io/github/inventare/django-rest-framework-supertest?branch=main'><img src='https://coveralls.io/repos/github/inventare/django-rest-framework-supertest/badge.svg?branch=main' alt='Coverage Status' /></a>
+    <a href="https://github.com/astral-sh/ruff"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;"></a>
 </p>
 
 ## Motivation
