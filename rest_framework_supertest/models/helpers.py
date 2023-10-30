@@ -11,6 +11,7 @@ def setup_faker_fields(
     Register `faker_fields` and `faker_args` inside the model to store the
     faker model constructor properties.
     """
+    return model_class
     if not issubclass(model_class, models.Model):
         msg = "Wrapped class must subclass Model."
         raise TypeError(msg)
