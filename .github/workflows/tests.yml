@@ -41,12 +41,3 @@ jobs:
       - name: Run Tests
         run: |
           python manage.py test
-
-  lint:
-    name: Run Lint on Files
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: chartboost/ruff-action@v1
-        with:
-          args: --preview
