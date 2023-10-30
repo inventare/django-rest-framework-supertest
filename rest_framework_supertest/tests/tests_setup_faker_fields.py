@@ -60,7 +60,7 @@ class SetupFakerFieldsTestCase(TestCase):
             extension.faker_fields,
             {'username': _username, 'first_name': _first_name},
         )
-        self.assertEqual(extension.faker_args, { 'username': {}, 'first_name': {}})
+        self.assertEqual(extension.faker_args, {'username': {}, 'first_name': {}})
         self.assertEqual(extension.__name__, User.__name__)
 
     def test_call_setup_faker_with_multiple_fields_args(self) -> None:
