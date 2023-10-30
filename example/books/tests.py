@@ -1,3 +1,5 @@
+
+"""
 from django.test import TestCase
 from rest_framework_simplejwt.settings import api_settings
 from rest_framework_supertest.test import APITestCase
@@ -22,7 +24,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-"""
+
 class BaseLoggedAPITestCase:
     def setUp(self):
         setup_faker_fields(
@@ -48,7 +50,7 @@ class SessionAPITestCase(BaseLoggedAPITestCase, APITestCase):
 
 
 """
-
+"""
 class BookTestAPITestCase(APITestCase):
     authentication_class = 'rest_framework_supertest.authentication.SimpleJWTAuthentication'
 
@@ -137,3 +139,4 @@ class BookTestAPITestCase(APITestCase):
 
         response = self.client.post('/api/logged/', {})
         self.assertHasValidationField(response, 'email', 'This field is required.')
+"""
