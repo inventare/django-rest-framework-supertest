@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     'example.books',
+
+    'rest_framework_supertest',
+    'tests',
 ]
 
 MIDDLEWARE = [
