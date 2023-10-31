@@ -6,7 +6,7 @@ from rest_framework_supertest.test import APITestCase
 from rest_framework_supertest.tests.utils import get_validation_response
 
 
-class ATestCase(TestCase):
+class AssertValidationTestCase(TestCase):
     def test_basic_validation_field(self) -> None:
         class Serializer(serializers.Serializer):
             email = serializers.EmailField()
@@ -124,6 +124,6 @@ class ATestCase(TestCase):
 
         case = AssertAPIValidationMixin()
         with self.assertRaises(AttributeError):
-            case.assertValidationResponse(response, {})
+            case.assert_validation_response(response, {})
 
 __all__ = []
