@@ -1,3 +1,4 @@
+import io
 import uuid
 from typing import Optional
 
@@ -21,7 +22,8 @@ def image(
         image_format: The image_format to store. See Pillow image file formats.
         file_name: The file name to store into `django.core.files.File` instance.
     """
-    buffer = fake.image(size=(width, height), image_format=image_format)
+    data = fake.image(size=(width, height), image_format=image_format)
+    buffer = io.BytesIO(data)
 
     if not file_name:
         name = str(uuid.uuid4())
