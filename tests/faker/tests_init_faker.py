@@ -16,15 +16,15 @@ class InitFakerTestCase(TestCase):
         mock.assert_called_once_with('en_US')
         self.assertIsNotNone(fake)
 
-    @override_settings(FAKER_ADD_PROVIDERS='tests.tests_init_faker.add_providers')
-    @patch('tests.tests_init_faker.add_providers')
+    @override_settings(FAKER_ADD_PROVIDERS='tests.faker.tests_init_faker.add_providers')
+    @patch('tests.faker.tests_init_faker.add_providers')
     def test_setup_init_providers_from_settings(self, mock: MagicMock) -> None:
         from rest_framework_supertest.utils.faker.initializer import initialize_faker
         fake = initialize_faker()
         mock.assert_called_once()
         self.assertIsNotNone(fake)
 
-    @override_settings(FAKER_ADD_PROVIDERS='tests.tests_init_faker.fake')
+    @override_settings(FAKER_ADD_PROVIDERS='tests.faker.tests_init_faker.fake')
     def test_setup_init_providers_with_invalid_func(self) -> None:
         from rest_framework_supertest.utils.faker.initializer import initialize_faker
         with self.assertRaises(ImportError):
