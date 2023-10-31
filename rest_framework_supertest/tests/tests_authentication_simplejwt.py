@@ -36,7 +36,7 @@ class SimpleJWTTestCase(TestCase):
 
         self.credentials.assert_called_once()
         kwargs = self.credentials.mock_calls[0].kwargs
-        authorization = str(kwargs.get('HTTP_AUTHORIZATION'))
+        authorization = kwargs.get('HTTP_AUTHORIZATION')
         print(authorization)
         self.assertTrue(authorization.startswith('Bearer '))
         token = authorization.replace('Bearer ', '')
