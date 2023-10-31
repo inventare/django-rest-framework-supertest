@@ -11,6 +11,7 @@ exclude = [
     "scripts",
     "manage.py",
     "example",
+    "**/migrations/**",
 ]
 line-length = 88
 indent-width = 4
