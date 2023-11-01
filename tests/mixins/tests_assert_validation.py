@@ -3,8 +3,7 @@ from rest_framework import serializers
 
 from rest_framework_supertest.mixins import AssertAPIValidationMixin
 from rest_framework_supertest.test import APITestCase
-
-from .utils import get_validation_response
+from tests.utils import get_validation_response
 
 
 class AssertValidationTestCase(TestCase):

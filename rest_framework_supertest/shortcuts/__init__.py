@@ -142,6 +142,7 @@ from .geographicals import (
     unique_latitude,
     unique_longitude,
 )
+from .images import image
 from .internet import (
     domain_name,
     domain_word,
@@ -303,6 +304,8 @@ __all__ = [
     # geographical
     'coordinate', 'latitude', 'longitude', 'unique_coordinate', 'unique_latitude',
     'unique_longitude',
+    # images
+    "image",
     # internet
     'domain_name', 'unique_domain_name', 'domain_word', 'unique_domain_word', 'tld',
     'ipv4', 'unique_ipv4', 'ipv4_network_class', 'ipv4_private', 'unique_ipv4_private',
