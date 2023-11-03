@@ -131,6 +131,7 @@ from .files import (
     file_name,
     image,
     mime_type,
+    pdf,
     unique_file_extension,
     unique_file_name,
     unique_mime_type,
@@ -300,7 +301,7 @@ __all__ = [
     'emoji', 'unique_emoji',
     # files
     'file_extension', 'file_name', 'mime_type', 'unique_file_extension',
-    'unique_file_name', 'unique_mime_type', "image",
+    'unique_file_name', 'unique_mime_type', "image", "pdf",
     # geographical
     'coordinate', 'latitude', 'longitude', 'unique_coordinate', 'unique_latitude',
     'unique_longitude',

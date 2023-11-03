@@ -120,3 +120,24 @@ def image(
         file_name = f"{name}.{image_format}"
 
     return File(buffer, file_name)
+
+PDF_WIDTH = 2480
+PDF_HEIGHT = 3508
+
+def pdf(fake: object, file_name: Optional[str] = None) -> File:
+    """
+    Generate a pdf file to store it to django file field.
+
+    Args:
+        fake: The `Faker` instance.
+        file_name: The file name to store into `django.core.files.File` instance.
+    """
+    data = fake.image(size=(PDF_WIDTH, PDF_HEIGHT), image_format='pdf')
+    buffer = io.BytesIO(data)
+
+    if not file_name:
+        name = str(uuid.uuid4())
+        file_name = f"{name}.pdf"
+
+    return File(buffer, file_name)
+

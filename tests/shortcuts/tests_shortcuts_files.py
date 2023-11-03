@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 from faker import Faker
 
 from rest_framework_supertest.shortcuts import files
-from tests.models import ImageModel
+from tests.models import FileModel, ImageModel
 
 from . import ShortcutTestCase
 
@@ -115,6 +115,45 @@ class ImagesShortcutsTests(ShortcutTestCase):
 
         model = ImageModel.objects.create(field=image)
         instance = ImageModel.objects.get(pk=model.pk)
+
+        self.assertTrue(bool(instance.field))
+
+
+class PdfShortcutsTests(ShortcutTestCase):
+    def test_pdf(self) -> None:
+        file_name = "any_file.pdf"
+
+        fake, mock = self.get_faker_mock(["image"])
+        mock.return_value = b''
+        output = files.pdf(fake, file_name=file_name)
+
+        mock.assert_called_once_with(
+            size=(files.PDF_WIDTH, files.PDF_HEIGHT),
+            image_format='pdf',
+        )
+        self.assertIsNotNone(output)
+        self.assertEqual(output.name, file_name)
+
+    @patch('rest_framework_supertest.shortcuts.files.uuid')
+    def test_pdf_without_name(self, mock: MagicMock) -> None:
+        file_name = "file_name"
+        mock.uuid4 = MagicMock()
+        mock.uuid4.return_value = file_name
+        fake = Faker()
+        output = files.pdf(fake)
+        expected_name = f"{file_name}.pdf"
+
+        mock.uuid4.assert_called_once()
+        self.assertIsNotNone(output)
+        self.assertEqual(output.name, expected_name)
+
+    def test_pdf_store_to_field(self) -> None:
+        image_name = "any_file.pdf"
+        fake = Faker()
+        image = files.pdf(fake, file_name=image_name)
+
+        model = FileModel.objects.create(field=image)
+        instance = FileModel.objects.get(pk=model.pk)
 
         self.assertTrue(bool(instance.field))
 
