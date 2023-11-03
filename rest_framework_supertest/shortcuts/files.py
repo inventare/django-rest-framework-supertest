@@ -1,4 +1,8 @@
+import io
+import uuid
 from typing import Optional
+
+from django.core.files import File
 
 from ._utils import unique
 
@@ -90,3 +94,50 @@ def unique_mime_type(fake: object, category: Optional[str] = None) -> str:
           'image', 'office', 'text', and 'video'.
     """
     return unique(fake, mime_type, category=category)
+
+def image(
+    fake: object,
+    width: int = 256,
+    height: int = 256,
+    image_format: str = 'png',
+    file_name: Optional[str] = None,
+) -> File:
+    """
+    Generate a image to store it to django file field.
+
+    Args:
+        fake: The `Faker` instance.
+        width: The image width.
+        height: The image height.
+        image_format: The image_format to store. See Pillow image file formats.
+        file_name: The file name to store into `django.core.files.File` instance.
+    """
+    data = fake.image(size=(width, height), image_format=image_format)
+    buffer = io.BytesIO(data)
+
+    if not file_name:
+        name = str(uuid.uuid4())
+        file_name = f"{name}.{image_format}"
+
+    return File(buffer, file_name)
+
+PDF_WIDTH = 2480
+PDF_HEIGHT = 3508
+
+def pdf(fake: object, file_name: Optional[str] = None) -> File:
+    """
+    Generate a pdf file to store it to django file field.
+
+    Args:
+        fake: The `Faker` instance.
+        file_name: The file name to store into `django.core.files.File` instance.
+    """
+    data = fake.image(size=(PDF_WIDTH, PDF_HEIGHT), image_format='pdf')
+    buffer = io.BytesIO(data)
+
+    if not file_name:
+        name = str(uuid.uuid4())
+        file_name = f"{name}.pdf"
+
+    return File(buffer, file_name)
+
