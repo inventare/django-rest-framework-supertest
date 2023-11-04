@@ -1,6 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-
+const { extendsTheme } = require('@inventare/docusaurus-theme');
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
@@ -128,4 +128,4 @@ const config = {
     }),
 };
 
-module.exports = config;
+module.exports = extendsTheme(config);
