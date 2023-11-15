@@ -158,4 +158,55 @@ class PdfShortcutsTests(ShortcutTestCase):
         self.assertTrue(bool(instance.field))
 
 
+class ZipShortcutsTests(ShortcutTestCase):
+    def test_zip(self) -> None:
+        file_name = "any_file.zip"
+        uncompressed_size = 1024
+        num_files = 4
+        min_file_size = 16
+        compression = 'test'
+
+        fake, mock = self.get_faker_mock(["zip"])
+        mock.return_value = b''
+        output = files.zip_file(
+            fake,
+            file_name=file_name,
+            uncompressed_size=uncompressed_size,
+            num_files=num_files,
+            min_file_size=min_file_size,
+            compression=compression,
+        )
+
+        mock.assert_called_once_with(
+            uncompressed_size=uncompressed_size,
+            num_files=num_files,
+            min_file_size=min_file_size,
+            compression=compression,
+        )
+        self.assertIsNotNone(output)
+        self.assertEqual(output.name, file_name)
+
+    @patch('rest_framework_supertest.shortcuts.files.uuid')
+    def test_zip_without_name(self, mock: MagicMock) -> None:
+        file_name = "file_name"
+        mock.uuid4 = MagicMock()
+        mock.uuid4.return_value = file_name
+        fake = Faker()
+        output = files.zip_file(fake)
+        expected_name = f"{file_name}.zip"
+
+        mock.uuid4.assert_called_once()
+        self.assertIsNotNone(output)
+        self.assertEqual(output.name, expected_name)
+
+    def test_zip_store_to_field(self) -> None:
+        image_name = "any_file.zip"
+        fake = Faker()
+        image = files.zip_file(fake, file_name=image_name)
+
+        model = FileModel.objects.create(field=image)
+        instance = FileModel.objects.get(pk=model.pk)
+
+        self.assertTrue(bool(instance.field))
+
 __all__ = []
