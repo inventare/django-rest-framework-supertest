@@ -135,6 +135,7 @@ from .files import (
     unique_file_extension,
     unique_file_name,
     unique_mime_type,
+    zip_file,
 )
 from .geographicals import (
     coordinate,
@@ -301,7 +302,7 @@ __all__ = [
     'emoji', 'unique_emoji',
     # files
     'file_extension', 'file_name', 'mime_type', 'unique_file_extension',
-    'unique_file_name', 'unique_mime_type', "image", "pdf",
+    'unique_file_name', 'unique_mime_type', "image", "pdf", "zip_file",
     # geographical
     'coordinate', 'latitude', 'longitude', 'unique_coordinate', 'unique_latitude',
     'unique_longitude',

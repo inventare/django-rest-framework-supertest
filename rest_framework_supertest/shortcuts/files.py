@@ -141,3 +141,39 @@ def pdf(fake: object, file_name: Optional[str] = None) -> File:
 
     return File(buffer, file_name)
 
+def zip_file(
+    fake: object,
+    file_name: Optional[str] = None,
+    uncompressed_size: int = 65536,
+    num_files: int = 1,
+    min_file_size: int = 4096,
+    compression: Optional[str] = None,
+) -> File:
+    """
+    Generate a zip file to store it to django file field.
+
+    Args:
+        fake: The `Faker` instance.
+        file_name: The file name to store into `django.core.files.File` instance.
+        uncompressed_size: The total size of files before compression, default: 16KiB.
+        num_files: the number of files archived in resulting zip file, default: 1.
+        min_file_size: the minimum size of each file before compression, default: 4KiB.
+        compression: No compression is used by default, but setting compression to one
+          of the values listed below will use the corresponding compression type:
+            - `bzip2` or `bz2` for BZIP2
+            - `lzma` or `xz` for LZMA
+            - `defalte`, `gzip` or `gz` for GZIP.
+    """
+    data = fake.zip(
+        uncompressed_size=uncompressed_size,
+        num_files=num_files,
+        min_file_size=min_file_size,
+        compression=compression,
+    )
+    buffer = io.BytesIO(data)
+
+    if not file_name:
+        name = str(uuid.uuid4())
+        file_name = f"{name}.zip"
+
+    return File(buffer, file_name)
