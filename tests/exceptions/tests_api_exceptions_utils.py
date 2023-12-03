@@ -4,7 +4,6 @@ from unittest.mock import MagicMock, patch
 from django.core.exceptions import PermissionDenied
 from django.http import Http404
 from django.test import TestCase
-from django.test.utils import override_settings
 from rest_framework.exceptions import NotFound
 from rest_framework.exceptions import PermissionDenied as ApiPermissionDenied
 
