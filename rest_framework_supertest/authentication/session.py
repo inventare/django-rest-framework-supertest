@@ -7,6 +7,7 @@ from .base import AuthenticationBase
 
 class SessionAuthentication(AuthenticationBase):
     """Implements adapter to use session with `AuthenticationBase` test utils."""
+
     def authenticate(self, user: Optional[AbstractUser]) -> None:
         """
         Authenticate an user with session.

@@ -5,6 +5,7 @@ from django.http import HttpResponse
 
 class AssertAPIResponseMixin:
     """Implements a Mixin to assert API responses in APITestCase."""
+
     def assert_response_headers(self, response: HttpResponse, headers: dict) -> None:
         """
         Assert if the response headers has some headers.

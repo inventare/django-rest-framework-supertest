@@ -13,5 +13,6 @@ class CountryCodeType(Enum):
     For example, United States has Alpha-2 country code as
     'US' and Alpha-3 as 'USA'.
     """
+
     ALPHA_2 = "alpha-2"
     ALPHA_3 = "alpha-3"

@@ -4,3 +4,4 @@ Pillow
 djangorestframework-simplejwt
 coverage
 coveralls
+ruff==0.1.6

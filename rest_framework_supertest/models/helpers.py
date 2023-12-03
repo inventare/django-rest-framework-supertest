@@ -8,7 +8,7 @@ def setup_faker_fields(
     **kwargs: dict,
 ) -> Type[models.Model]:
     """
-    Setup faker fields for an model class.
+    Setups faker fields for an model class.
 
     Register `faker_fields` and `faker_args` inside the model to store the
     faker model constructor properties.
