@@ -14,10 +14,10 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "2.4.3",
-    "@docusaurus/preset-classic": "2.4.3",
-    "@docusaurus/theme-classic": "2.4.3",
-    "@docusaurus/theme-common": "2.4.3",
+    "@docusaurus/core": "3.0.1",
+    "@docusaurus/preset-classic": "3.0.1",
+    "@docusaurus/theme-classic": "3.0.1",
+    "@docusaurus/theme-common": "3.0.1",
     "@inventare/docusaurus-theme": "^0.0.6",
     "@inventare/docusaurus-theme-colors": "^0.0.1",
     "@inventare/prisma-theme": "^0.0.1",
