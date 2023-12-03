@@ -24,6 +24,7 @@ class SimpleJWTAuthentication(AuthenticationBase):
     Determinates `authenticate` function for the SimpleJWT and exceptions
     for authentication failed and unauthentication.
     """
+
     authentication_failed_exceptions: ClassVar[List[APIException]] = [
         NO_ACTIVE_ACCOUNT,
     ]

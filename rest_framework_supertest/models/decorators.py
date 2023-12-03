@@ -7,7 +7,7 @@ from rest_framework_supertest.models.helpers import setup_faker_fields
 
 def faker_fields(**kwargs: dict) -> Callable:
     """
-    Setup faker fields for an model class.
+    Setups faker fields for a model class.
 
     Register `faker_fields` and `faker_args` inside the model to store the
     faker model constructor properties.

@@ -8,6 +8,7 @@ from rest_framework.test import APIClient, APITestCase
 
 class AuthenticationBase(ABC):
     """Base Class for Authentication Test Helper."""
+
     client: APIClient
     test_case: APITestCase
     unauthentication_exceptions: ClassVar[List[Exception]] = [
