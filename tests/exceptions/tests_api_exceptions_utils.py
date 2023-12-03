@@ -4,7 +4,8 @@ from unittest.mock import MagicMock, patch
 from django.core.exceptions import PermissionDenied
 from django.http import Http404
 from django.test import TestCase
-from rest_framework.exceptions import NotFound
+from rest_framework import status
+from rest_framework.exceptions import AuthenticationFailed, NotAuthenticated, NotFound
 from rest_framework.exceptions import PermissionDenied as ApiPermissionDenied
 
 from rest_framework_supertest.utils.exceptions import APIExceptionsUtils
@@ -64,5 +65,92 @@ class APIExceptionsUtilsTests(TestCase):
             utils = APIExceptionsUtils(self.response, MagicMock())
             self.assertIsNone(utils.get_authenticate_header())
             resolve.assert_called_once_with(path)
+
+    def test_handle_auth_headers_without_auth_exceptions(self) -> None:
+        exc = NotFound()
+        utils = APIExceptionsUtils(self.response, exc)
+        utils.handle_auth_headers()
+        self.assertFalse(hasattr(exc, 'auth_header'))
+        self.assertNotEqual(exc.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_handle_auth_headers_with_auth_exceptions_header(self) -> None:
+        header = 'HEADER HERE!'
+        exc = AuthenticationFailed()
+        utils = APIExceptionsUtils(self.response, exc)
+        utils.get_authenticate_header = lambda: header
+        utils.handle_auth_headers()
+        self.assertEqual(exc.auth_header, header)
+        self.assertNotEqual(exc.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_handle_auth_headers_with_auth_exceptions_header2(self) -> None:
+        header = 'HEADER HERE!'
+        exc = NotAuthenticated()
+        utils = APIExceptionsUtils(self.response, exc)
+        utils.get_authenticate_header = lambda: header
+        utils.handle_auth_headers()
+        self.assertEqual(exc.auth_header, header)
+        self.assertNotEqual(exc.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_handle_auth_headers_without_auth_header(self) -> None:
+        exc = NotAuthenticated()
+        utils = APIExceptionsUtils(self.response, exc)
+        utils.get_authenticate_header = lambda: None
+        utils.handle_auth_headers()
+        self.assertFalse(hasattr(exc, 'auth_header'))
+        self.assertEqual(exc.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_get_headers_auth_header(self) -> None:
+        header = 'NEW HEADER!'
+        exc = MagicMock()
+        exc.auth_header = header
+        exc.wait = None
+        utils = APIExceptionsUtils(self.response, exc)
+        data = utils.get_headers()
+        self.assertDictEqual(data, {
+            'WWW-Authenticate': header,
+        })
+
+    def test_get_headers_wait(self) -> None:
+        exc = MagicMock()
+        exc.auth_header = None
+        exc.wait = 5
+        utils = APIExceptionsUtils(self.response, exc)
+        data = utils.get_headers()
+        self.assertDictEqual(data, {
+            'Retry-After': '5',
+        })
+
+    def test_get_headers_auth_header_wait(self) -> None:
+        header = 'NEW HEADER!'
+        exc = MagicMock()
+        exc.auth_header = header
+        exc.wait = 5
+        utils = APIExceptionsUtils(self.response, exc)
+        data = utils.get_headers()
+        self.assertDictEqual(data, {
+            'WWW-Authenticate': header,
+            'Retry-After': '5',
+        })
+
+    def test_get_data_list(self) -> None:
+        data = ['any data here?']
+        exc = MagicMock()
+        exc.detail = data
+        utils = APIExceptionsUtils(self.response, exc)
+        self.assertListEqual(utils.get_data(), data)
+
+    def test_get_data_dict(self) -> None:
+        data = {'any': ['any data here?']}
+        exc = MagicMock()
+        exc.detail = data
+        utils = APIExceptionsUtils(self.response, exc)
+        self.assertDictEqual(utils.get_data(), data)
+
+    def test_get_data_str(self) -> None:
+        data = 'any data here?'
+        exc = MagicMock()
+        exc.detail = data
+        utils = APIExceptionsUtils(self.response, exc)
+        self.assertDictEqual(utils.get_data(), {'detail': data})
 
 __all__ = []
