@@ -24,9 +24,9 @@ Under the hood, this is only an set of utilities and this uses some libraries to
 - [x] Assertions APIExceptions
 - [x] Assert Validation Errors
 - [x] Create Faker Shortcuts
+- [x] Work with images and files
 - [ ] Assert Serializer Responses
 - [ ] Work with multiple types of Authentication
 - [ ] Work with pagination
-- [ ] Work with images and files
 
 > This is an basic roadmap for the first version and, before the first version release, some new itens can be added here.
