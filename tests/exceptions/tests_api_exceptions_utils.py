@@ -5,7 +5,12 @@ from django.core.exceptions import PermissionDenied
 from django.http import Http404
 from django.test import TestCase
 from rest_framework import status
-from rest_framework.exceptions import AuthenticationFailed, NotAuthenticated, NotFound
+from rest_framework.exceptions import (
+    APIException,
+    AuthenticationFailed,
+    NotAuthenticated,
+    NotFound,
+)
 from rest_framework.exceptions import PermissionDenied as ApiPermissionDenied
 
 from rest_framework_supertest.utils.exceptions import APIExceptionsUtils
@@ -152,5 +157,26 @@ class APIExceptionsUtilsTests(TestCase):
         exc.detail = data
         utils = APIExceptionsUtils(self.response, exc)
         self.assertDictEqual(utils.get_data(), {'detail': data})
+
+    def test_exception_handler_without_exception(self) -> None:
+        exc = MagicMock()
+        utils = APIExceptionsUtils(self.response, exc)
+        with self.assertRaises(NotImplementedError):
+            utils.exception_handler()
+
+    def test_exception_handler_with_valid_exception(self) -> None:
+        exc = APIException()
+        exc.auth_header = 'EXAMPLE'
+        exc.wait = 10
+        exc.status_code = 422
+        exc.detail = {'test': 'data', 'error': 'exception'}
+        utils = APIExceptionsUtils(self.response, exc)
+        data, status, headers = utils.exception_handler()
+        self.assertEqual(status, 422)
+        self.assertDictEqual(data, {'test': 'data', 'error': 'exception'})
+        self.assertDictEqual(headers, {
+            'WWW-Authenticate': 'EXAMPLE',
+            'Retry-After': '10',
+        })
 
 __all__ = []
