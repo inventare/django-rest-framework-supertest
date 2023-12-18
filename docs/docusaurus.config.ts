@@ -1,10 +1,7 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
-const { extendsTheme } = require('@inventare/docusaurus-theme');
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+import { themes } from 'prism-react-renderer';
+const lightTheme = themes.github;
+const darkTheme = themes.dracula;
 
-/** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'django-rest-framework-supertest',
   tagline: 'An set of utilities to write automated tests for APIs writen in django-rest-framework.',
@@ -122,10 +119,11 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()}. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        additionalLanguages: ['bash', 'diff', 'json'],
+        theme: lightTheme,
+        darkTheme: darkTheme,
       },
     }),
 };
 
-module.exports = extendsTheme(config);
+export default config;
