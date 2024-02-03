@@ -5,6 +5,41 @@ from django.db import models
 from rest_framework_supertest.utils.faker import fake
 
 
+def create_faker_data(
+    model_class: Type[models.Model],
+    data: Optional[dict] = None,
+) -> dict:
+    """
+    Create data to instantiate the model.
+
+    Uses the `faker_fields` and `faker_args` of the model class to
+    create data for the faker model.
+
+    Args:
+        model_class: The class of the model to create data.
+        data: Additional data to override the default data setuped
+          from faker. This is used to customize fields to some
+          specific test cases.
+
+    Returns:
+        A dict with the model data.
+    """
+    faker_fields = model_class.faker_fields
+    faker_args = model_class.faker_args
+    fields = faker_fields.keys()
+    create_dict = {}
+    for field in fields:
+        args = faker_args.get(field) or {}
+        create_dict[field] = faker_fields[field](fake, **args)
+
+    if not data:
+        data = {}
+
+    return {
+        **create_dict,
+        **data,
+    }
+
 def create_faker(
     model_class: Type[models.Model],
     data: Optional[dict] = None,
@@ -29,21 +64,7 @@ def create_faker(
     Returns:
         A instance of the `model_class`.
     """
-    faker_fields = model_class.faker_fields
-    faker_args = model_class.faker_args
-    fields = faker_fields.keys()
-    create_dict = {}
-    for field in fields:
-        args = faker_args.get(field) or {}
-        create_dict[field] = faker_fields[field](fake, **args)
-
-    if not data:
-        data = {}
-
-    create_dict = {
-        **create_dict,
-        **data,
-    }
+    create_dict = create_faker_data(model_class, data)
 
     if save:
         return model_class.objects.create(**create_dict)
