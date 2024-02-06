@@ -1,0 +1,9 @@
+include README.md
+include LICENSE
+recursive-exclude scripts *
+recursive-exclude tests *
+recursive-exclude docs *
+recursive-exclude example *
+recursive-exclude htmlcov *
+recursive-exclude .github *
+recursive-include rest_framework_supertest *
