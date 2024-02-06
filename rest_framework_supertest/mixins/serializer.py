@@ -1,3 +1,5 @@
+from typing import List, Union
+
 from django.http import HttpResponse
 from rest_framework.serializers import Serializer
 
@@ -5,7 +7,11 @@ from rest_framework.serializers import Serializer
 class AssertSerializersMixin:
     """Implements a Mixin to assert serializer data in APITestCase."""
 
-    def assert_serializer_data(self, data: dict, serializer: Serializer) -> None:
+    def assert_serializer_data(
+        self,
+        data: Union[dict, List],
+        serializer: Serializer,
+    ) -> None:
         """
         Assert if the data is equals the serializer output data.
 
@@ -14,7 +20,12 @@ class AssertSerializersMixin:
             serializer: the serializer to get data and extract.
         """
         output_data = serializer.data
-        self.assertDictEqual(output_data, data)
+        if isinstance(data, dict):
+            return self.assertDictEqual(output_data, data)
+        if isinstance(data, list):
+            return self.assertListEqual(output_data, data)
+
+        return self.fail("Only dict or list is acceptable.")
 
     def assert_serializer_response_data(
         self,
