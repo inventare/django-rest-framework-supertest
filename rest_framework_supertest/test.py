@@ -5,6 +5,7 @@ from rest_framework_supertest.mixins import (
     AssertAPIResponseMixin,
     AssertAPIValidationMixin,
     AssertAuthenticationMixin,
+    AssertPaginationMixin,
     AssertSerializersMixin,
 )
 
@@ -15,6 +16,7 @@ class APITestCase(
     AssertAuthenticationMixin,
     AssertAPIValidationMixin,
     AssertSerializersMixin,
+    AssertPaginationMixin,
     BaseAPITestCase,
 ):
     """
