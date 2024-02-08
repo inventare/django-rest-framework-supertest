@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import os
-from setuptools import setup, find_packages
 
-f = open(os.path.join(os.path.dirname(__file__), 'README.md'))
-readme = f.read()
-f.close()
+from setuptools import find_packages, setup
+
+readme = ''
+with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
+    readme = f.read()
 
 setup(
     name='django-rest-framework-supertest',
