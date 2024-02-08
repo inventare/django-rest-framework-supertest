@@ -9,7 +9,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
 
 setup(
     name='django-rest-framework-supertest',
-    version='0.0.2',
+    version='0.0.1',
     description="A set of utilities to test django-rest-framework API's",
     long_description=readme,
     long_description_content_type='text/markdown',
