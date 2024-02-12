@@ -1,8 +1,11 @@
 from typing import ClassVar, List, Optional
 
 from django.contrib.auth.models import AbstractUser
+from django.http import HttpResponse
 from rest_framework.exceptions import APIException
-from rest_framework_simplejwt.tokens import AccessToken
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.settings import api_settings
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 
 from rest_framework_supertest.authentication import AuthenticationBase
 
@@ -24,6 +27,9 @@ class SimpleJWTAuthentication(AuthenticationBase):
     Determinates `authenticate` function for the SimpleJWT and exceptions
     for authentication failed and unauthentication.
     """
+
+    access_token_field = 'access'  # noqa: S105
+    refresh_token_field = 'refresh'  # noqa: S105
 
     authentication_failed_exceptions: ClassVar[List[APIException]] = [
         NO_ACTIVE_ACCOUNT,
@@ -54,5 +60,39 @@ class SimpleJWTAuthentication(AuthenticationBase):
 
         token = str(AccessToken.for_user(user))
         self.client.credentials(HTTP_AUTHORIZATION='Bearer %s' % token)
+
+    def is_valid_auth_response(
+        self,
+        response: HttpResponse,
+        user: AbstractUser,
+    ) -> bool:
+        """
+        Check if a response is a valid authentication response for a user.
+
+        Args:
+            response: The `HttpResponse` to check.
+            user: The user to check if the reponse is valid for this user.
+        """
+        data = response.json()
+        refresh_token = data.get(self.refresh_token_field)
+        access_token = data.get(self.access_token_field)
+
+        refresh_token = RefreshToken(refresh_token)
+        access_token = AccessToken(access_token)
+
+        try:
+            refresh_token.verify()
+        except TokenError:
+            return False
+        try:
+            access_token.verify()
+        except TokenError:
+            return False
+
+        refresh_user_id = refresh_token[api_settings.USER_ID_CLAIM]
+        access_user_id = access_token[api_settings.USER_ID_CLAIM]
+
+        return refresh_user_id == user.id and access_user_id == user.id
+
 
 __all__ = ['SimpleJWTAuthentication']

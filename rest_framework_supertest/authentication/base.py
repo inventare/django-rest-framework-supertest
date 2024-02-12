@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import ClassVar, List, Optional
 
 from django.contrib.auth.models import AbstractUser
+from django.http import HttpResponse
 from rest_framework import exceptions
 from rest_framework.test import APIClient, APITestCase
 
@@ -30,6 +31,16 @@ class AuthenticationBase(ABC):
     def authenticate(self, user: Optional[AbstractUser]) -> None:
         """Authenticate an user for the requests."""
         msg = "authenticate() method is not implemented"
+        raise NotImplementedError(msg)
+
+    @abstractmethod
+    def is_valid_auth_response(
+        self,
+        response: HttpResponse,
+        user: AbstractUser,
+    ) -> bool:
+        """Check if a auth response is valid for a user."""
+        msg = "is_valid_auth_response() method is not implemented"
         raise NotImplementedError(msg)
 
 __all__ = ['AuthenticationBase']
