@@ -30,8 +30,6 @@ class AuthenticationBase(ABC):
     @abstractmethod
     def authenticate(self, user: Optional[AbstractUser]) -> None:
         """Authenticate an user for the requests."""
-        msg = "authenticate() method is not implemented"
-        raise NotImplementedError(msg)
 
     @abstractmethod
     def is_valid_auth_response(
@@ -40,7 +38,5 @@ class AuthenticationBase(ABC):
         user: AbstractUser,
     ) -> bool:
         """Check if a auth response is valid for a user."""
-        msg = "is_valid_auth_response() method is not implemented"
-        raise NotImplementedError(msg)
 
 __all__ = ['AuthenticationBase']
