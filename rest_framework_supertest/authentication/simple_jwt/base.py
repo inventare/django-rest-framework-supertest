@@ -77,14 +77,13 @@ class SimpleJWTAuthentication(AuthenticationBase):
         refresh_token = data.get(self.refresh_token_field)
         access_token = data.get(self.access_token_field)
 
-        refresh_token = RefreshToken(refresh_token)
-        access_token = AccessToken(access_token)
-
         try:
+            refresh_token = RefreshToken(refresh_token)
             refresh_token.verify()
         except TokenError:
             return False
         try:
+            access_token = AccessToken(access_token)
             access_token.verify()
         except TokenError:
             return False
