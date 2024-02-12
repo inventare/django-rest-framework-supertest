@@ -19,10 +19,14 @@ class SimpleJWTTestCase(TestCase):
         self.auth = SimpleJWTAuthentication(self.test_case)
         self.password = "ANY PASSWORD"  # noqa: S105
 
-    def get_user(self) -> User:
+    def get_user(
+        self,
+        email: str = 'example@example.com.br',
+        username: str = 'any-user-here',
+    ) -> User:
         return User.objects.create_user(
-            username='any-user-here',
-            email='example@example.com.br',
+            username=username,
+            email=email,
             password=self.password,
         )
 
@@ -58,6 +62,25 @@ class SimpleJWTTestCase(TestCase):
         response.headers = {}
         response.json = MagicMock(return_value=data)
 
+        self.assertTrue(self.auth.is_valid_auth_response(response, user))
+
+    def test_jwt_authentication_response_wrong_user(self) -> None:
+        email = 'exxx@example.com.br'
+        username = 'my_user'
+        user2 = self.get_user()
+        user = self.get_user(email=email, username=username)
+        serializer = TokenObtainPairSerializer(data={
+            'username': username,
+            'password': self.password,
+        })
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+        response = MagicMock()
+        response.status_code = 200
+        response.headers = {}
+        response.json = MagicMock(return_value=data)
+
+        self.assertFalse(self.auth.is_valid_auth_response(response, user2))
         self.assertTrue(self.auth.is_valid_auth_response(response, user))
 
     def test_jwt_authentication_response_invalid_access(self) -> None:
