@@ -1,4 +1,4 @@
-Django==4.2.10
+Django==4.2.11
 djangorestframework==3.14.0
 Faker==v19.6.1
 Pillow==10.2.0
