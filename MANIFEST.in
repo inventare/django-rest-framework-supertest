@@ -7,3 +7,5 @@ recursive-exclude example *
 recursive-exclude htmlcov *
 recursive-exclude .github *
 recursive-include rest_framework_supertest *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

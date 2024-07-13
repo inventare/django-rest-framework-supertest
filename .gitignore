@@ -5,3 +5,6 @@ __pycache__
 .coverage
 .ruff_cache
 htmlcov
+*.egg-info
+dist
+build
