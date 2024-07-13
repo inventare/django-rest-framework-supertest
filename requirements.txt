@@ -1,5 +1,0 @@
-Django==4.2.11
-djangorestframework==3.14
-Faker==v19.6.1
-Pillow==10.3.0
-ruff==0.1.6
