@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://inventare.github.io/django-rest-framework-supertest/">
+        <link rel="canonical" href="https://inventare.github.io/django-rest-framework-supertest/philosophy/authentication-behaviour/">
       
       
+        <link rel="prev" href="../api-exception/">
       
-        <link rel="next" href="philosophy/api-exception/">
+      
+        <link rel="next" href="../../adr/0000-faker-shortcuts/">
       
       
-      <link rel="icon" href="images/favicon.png">
+      <link rel="icon" href="../../images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
     
     
       
-        <title>django-rest-framework-supertest</title>
+        <title>Authentication Behaviour - django-rest-framework-supertest</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.6543a935.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,14 +48,14 @@
       
     
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
     
-   <link href="assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
     html.glightbox-open { overflow: initial; height: 100%; }
     .gslide-title { margin-top: 0px; user-select: text; }
     .gslide-desc { color: #666; user-select: text; }
@@ -62,7 +64,7 @@
     .gdesc-inner { font-size: 0.75rem; }
     body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
     body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
-    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="assets/javascripts/glightbox.min.js"></script></head>
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -79,7 +81,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#getting-started" class="md-skip">
+        <a href="#authentication-behaviour" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Getting started
+              Authentication Behaviour
             
           </span>
         </div>
@@ -190,11 +192,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
     
@@ -209,11 +209,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="philosophy/api-exception/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../api-exception/" class="md-tabs__link">
           
   
   Philosophy
@@ -231,7 +233,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="adr/0000-faker-shortcuts/" class="md-tabs__link">
+        <a href="../../adr/0000-faker-shortcuts/" class="md-tabs__link">
           
   
   Architecture Decision Records
@@ -297,19 +299,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -318,7 +311,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -327,23 +319,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -354,7 +351,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Philosophy
@@ -368,7 +365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="philosophy/api-exception/" class="md-nav__link">
+      <a href="../api-exception/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -386,10 +383,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="philosophy/authentication-behaviour/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Authentication Behaviour
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -398,6 +415,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#our-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Our Philosophy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#techinical-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      Techinical Part
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -455,7 +519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="adr/0000-faker-shortcuts/" class="md-nav__link">
+      <a href="../../adr/0000-faker-shortcuts/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -496,6 +560,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#our-philosophy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Our Philosophy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#techinical-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      Techinical Part
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -512,7 +611,18 @@
   
 
 
-<h1 id="getting-started">Getting started</h1>
+<h1 id="authentication-behaviour">Authentication Behaviour</h1>
+<p>This text introduces our philosophy about authentication behaviour testing inside django REST API's.</p>
+<h2 id="introduction">Introduction</h2>
+<p>The <code>APIClient</code> present at the <code>APITestCase</code> of the <strong>django</strong> and <strong>django-rest-framework</strong> provides two methods to work with authentication: <code>login()</code> and <code>force_login()</code> with two different behaviours. The first method uses the configured django authentication back-end's (equivalent of adapter design pattern, for non-django developers).</p>
+<p>As, we comented above, this methods uses the default <strong>django</strong> session authentication, because those methods are writen by default client and not by <strong>django-rest-framework</strong> or by <strong>djangorestframework-simplejwt</strong>, for jwt authentication-based API's.</p>
+<p>For example, this methods are good mehtods for testing the <strong>django-admin</strong> Ajax API Views, like the <code>AutocompleteJsonView</code> (<a href="https://github.com/django/django/blob/main/django/contrib/admin/views/autocomplete.py#L8C7-L8C27">ref</a>) but are not effective for testing API's with JWT, Basic or Token model authentication-based API's.</p>
+<h2 id="our-philosophy">Our Philosophy</h2>
+<p>Our philosophy about testing with JWT Authentication, or other Authorization header based method, is test all the behaviour of authentication inside the aplication with real use-cases. To made this work a little bit easy, we decided to introduce <strong>authentication</strong> helpers for the <code>APITestCase</code>.</p>
+<p>The helper is configurable and the agnostic methods and assertions are defined inside an mixin.</p>
+<h2 id="techinical-part">Techinical Part</h2>
+<hr />
+<p>TODO: write technical part for this text.</p>
 
 
 
@@ -565,10 +675,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
     
   <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
