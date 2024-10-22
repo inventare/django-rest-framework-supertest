@@ -235,6 +235,7 @@ from .phone_numbers import (
     unique_country_calling_code,
     unique_phone_number,
 )
+from .related import foreign_key
 
 __all__ = [
     # addresses
@@ -316,4 +317,6 @@ __all__ = [
     # phone numbers
     'country_calling_code', 'phone_number', 'unique_country_calling_code',
     'unique_phone_number',
+    # related
+    'foreign_key',
 ]

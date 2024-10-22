@@ -18,3 +18,11 @@ class FileModel(models.Model):
     def __str__(self):
         """Return a representation string of the model."""
         return str(self.field)
+
+class RelatedParent(models.Model):
+    """Define a Parent Model to test related shortcut."""
+    name = models.CharField(max_length=150)
+
+class RelatedChild(models.Model):
+    """Define a Child Model to test related shortcut."""
+    parent = models.ForeignKey(RelatedParent, on_delete=models.CASCADE)
