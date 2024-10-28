@@ -28,7 +28,7 @@ class APIExceptionsUtils:
               to work with utils.
         """
         self.response = response
-        self.request = getattr(response, 'wsgi_request', None)
+        self.request = getattr(response, "wsgi_request", None)
         self.exc = exception
         self.transform_exception()
 
@@ -61,9 +61,12 @@ class APIExceptionsUtils:
 
         path = self.request.path
         view_function, _, _ = resolve(path)
-        view_class = view_function.view_class
+        if not hasattr(view_function, "view_class"):
+            return None
 
+        view_class = view_function.view_class
         instance = view_class()
+
         return instance.get_authenticate_header(self.request)
 
     def handle_auth_headers(self) -> None:
@@ -85,11 +88,11 @@ class APIExceptionsUtils:
         """Return the response headers from the exception."""
         headers = {}
 
-        if getattr(self.exc, 'auth_header', None):
-            headers['WWW-Authenticate'] = self.exc.auth_header
+        if getattr(self.exc, "auth_header", None):
+            headers["WWW-Authenticate"] = self.exc.auth_header
 
-        if getattr(self.exc, 'wait', None):
-            headers['Retry-After'] = '%d' % self.exc.wait
+        if getattr(self.exc, "wait", None):
+            headers["Retry-After"] = "%d" % self.exc.wait
 
         return headers
 
@@ -98,7 +101,7 @@ class APIExceptionsUtils:
         if isinstance(self.exc.detail, (list, dict)):
             return self.exc.detail
 
-        return {'detail': self.exc.detail}
+        return {"detail": self.exc.detail}
 
     def exception_handler(self) -> (Union[list, dict], int, dict):
         """
