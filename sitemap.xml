@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://inventare.github.io/django-rest-framework-supertest/</loc>
-         <lastmod>2024-10-22</lastmod>
+         <lastmod>2024-10-28</lastmod>
     </url>
     <url>
          <loc>https://inventare.github.io/django-rest-framework-supertest/adr/0000-faker-shortcuts/</loc>
-         <lastmod>2024-10-22</lastmod>
+         <lastmod>2024-10-28</lastmod>
     </url>
     <url>
          <loc>https://inventare.github.io/django-rest-framework-supertest/philosophy/api-exception/</loc>
-         <lastmod>2024-10-22</lastmod>
+         <lastmod>2024-10-28</lastmod>
     </url>
     <url>
          <loc>https://inventare.github.io/django-rest-framework-supertest/philosophy/authentication-behaviour/</loc>
-         <lastmod>2024-10-22</lastmod>
+         <lastmod>2024-10-28</lastmod>
     </url>
 </urlset>
