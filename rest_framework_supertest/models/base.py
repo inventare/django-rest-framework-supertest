@@ -24,21 +24,24 @@ def create_faker_data(
     Returns:
         A dict with the model data.
     """
+    if not data:
+        data = {}
+
     faker_fields = model_class.faker_fields
     faker_args = model_class.faker_args
     fields = faker_fields.keys()
     create_dict = {}
     for field in fields:
+        if data.get(field):
+            continue
         args = faker_args.get(field) or {}
         create_dict[field] = faker_fields[field](fake, **args)
-
-    if not data:
-        data = {}
 
     return {
         **create_dict,
         **data,
     }
+
 
 def create_faker(
     model_class: Type[models.Model],
